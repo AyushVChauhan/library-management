@@ -36,7 +36,7 @@ async function register(req, res, next) {
 		email,
 		fullname,
 		password: md5(password),
-		role: rolesConstant.ADMIN,
+		role: rolesConstant.USER,
 		username,
 	});
 	await user.save();

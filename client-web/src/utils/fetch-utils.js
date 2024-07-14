@@ -20,7 +20,7 @@ export async function fetchGet(pathName, method = 'GET') {
 		if (request.status == 405) {
 			localStorage.removeItem('role');
 			localStorage.removeItem('token');
-			window.open('/', '_self');
+			window.open('/login', '_self');
 			return;
 		}
 		const response = await request.json();
@@ -55,7 +55,7 @@ export async function fetchPost(pathName, body, method = 'POST', contentType = '
 		if (request.status == 405) {
 			localStorage.removeItem('role');
 			localStorage.removeItem('token');
-			window.open('/', '_self');
+			window.open('/login', '_self');
 			return;
 		}
 		const response = await request.json();
@@ -82,7 +82,7 @@ export async function fetchUpload(pathName, body) {
 		if (request.status == 405) {
 			localStorage.removeItem('role');
 			localStorage.removeItem('token');
-			window.open('/', '_self');
+			window.open('/login', '_self');
 			return;
 		}
 		const response = await request.json();
