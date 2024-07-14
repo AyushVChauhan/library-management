@@ -19,6 +19,7 @@ router.use(authMiddleware(rolesConstant.USER));
 router.get('/verify', asyncRouteHandler(verify));
 router.get('/pay/:borrowId', asyncRouteHandler(userController.payOverdue));
 router.get('/history', asyncRouteHandler(userController.history));
+router.get('/payments-due', asyncRouteHandler(userController.paymentsDue));
 //trending
 //new arrival
 //request book

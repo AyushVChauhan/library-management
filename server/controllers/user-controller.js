@@ -75,7 +75,15 @@ async function payOverdue(req, res, next) {
 	});
 
 	await transaction.save();
-	ok200(res, paymentIntent.client_secret);
+
+	borrow.transaction.push(transaction._id);
+	await borrow.save();
+	ok200(res, { client_secret: paymentIntent.client_secret, amount });
 }
 
-module.exports = { trendingBooks, newestArrival, payOverdue, history };
+async function paymentsDue(req, res, next) {
+	const borrow = await borrowModel.find({ payment_status: { $exists: false }, can_pay: true }).populate('book');
+	ok200(res, borrow);
+}
+
+module.exports = { trendingBooks, newestArrival, payOverdue, history, paymentsDue };

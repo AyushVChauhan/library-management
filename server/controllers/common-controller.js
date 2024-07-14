@@ -3,9 +3,11 @@ const { CustomError } = require('../utils/router-utils');
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/users.models');
 const crypto = require('crypto');
-const { passwordReset } = require('../utils/mail-utils');
+const { passwordReset, sendMail } = require('../utils/mail-utils');
 const { ok200 } = require('../utils/response-utils');
 const rolesConstant = require('../constants/roles.constant');
+const transactionModel = require('../models/transaction.model');
+const borrowModel = require('../models/borrow.models');
 /**
  *
  * @param {import("express").Request} req
@@ -105,6 +107,20 @@ async function resetPassword(req, res, next) {
 
 async function paymentSuccess(req, res, next) {
 	console.log(req.query);
+	const transaction = await transactionModel.findOne({ paymentIntentId: req.query.payment_intent });
+	transaction.status = 'SUCCESS';
+	await transaction.save();
+	const borrow = await borrowModel.findOne({ _id: transaction.borrow });
+	borrow.payment_status = true;
+	borrow.return_date = new Date();
+	await borrow.save();
+	await borrow.populate('user');
+	await sendMail(
+		borrow.user.email,
+		'PAYMENT SUCCESSFUL',
+		`<h1>Thank you for your payment!</h1>
+            <p>Your payment of ${transaction.amount} has been successfully processed.</p>`
+	);
 	ok200(res, req.query);
 }
 
