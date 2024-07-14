@@ -56,6 +56,10 @@ async function userActivity(req, res, next) {
 	let data = await borrowModel.find({ user: id }).populate('book').populate('transaction');
 	ok200(res, data);
 }
+async function getUsers(req, res, next) {
+	let data = await userModel.find({ role: 'USER' });
+	ok200(res, data);
+}
 
 module.exports = {
 	dashboard,
@@ -65,4 +69,5 @@ module.exports = {
 	getLibrarians,
 	history,
 	userActivity,
+	getUsers,
 };
