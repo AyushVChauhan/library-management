@@ -18,7 +18,7 @@ const BookCard = ({ book }) => {
 				<p className="text-ellipsis line-clamp-2">
 					{book.description ? book.description.slice(0, 100) + '...' : 'No description available.'}
 				</p>
-				<div className="mt-3 text-end">
+				<div className="mt-3 flex justify-center gap-5 p-5">
 					<button
 						className="bg-darkBlue text-white p-2 rounded-md border-0"
 						type="button"
@@ -27,7 +27,7 @@ const BookCard = ({ book }) => {
 						View Details
 					</button>
 					<button
-						className="bg-darkBlue text-white p-2 rounded-md border-0"
+						className="bg-green-600 text-white p-2 rounded-md border-0"
 						type="button"
 						onClick={() => navigate(`borrow/${book._id}`)}
 					>

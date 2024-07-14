@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchGet } from '../../utils/fetch-utils';
+import Loading from '../../components/Loading';
 
 const BookDetail = () => {
 	const { id } = useParams();
+	const [loading, setLoading] = useState(true);
 	const role = localStorage.getItem('role').toLowerCase();
 	const [bookData, setBookData] = useState([]);
 	const getBookData = async () => {
+		setLoading(true);
 		const result = await fetchGet(`${role}/book/${id}`);
 		if (result.success) {
 			console.log(result.data);
 			setBookData(result.data);
+			setLoading(false);
 		}
 	};
 	useEffect(() => {
 		getBookData();
 	}, [id]);
+	if (loading) return <Loading />;
 	return (
 		<>
 			<div className="px-10">
