@@ -16,4 +16,5 @@ router.get('/book/get/:isbn', asyncRouteHandler(librarianController.getBookFromI
 router.post('/book', asyncRouteHandler(librarianController.addBook));
 router.get('/genre', asyncRouteHandler(getGenre));
 
+router.get('/book', asyncRouteHandler(librarianController.getBooks));
 module.exports = router;
