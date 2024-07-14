@@ -7,8 +7,15 @@ const borrowModel = require('../models/borrow.models');
 const { CustomError } = require('../utils/router-utils');
 const { randomBytes } = require('crypto');
 const rolesConstant = require('../constants/roles.constant');
+const bookModel = require('../models/books.models');
 async function dashboard(req, res, next) {
-	ok200(res, { count1: 100, count2: 200 });
+	const userCount = await userModel.countDocuments({ role: 'USER' });
+	const librarianCount = await userModel.countDocuments({ role: 'LIBRARIAN' });
+	const genreCount = await genreModel.countDocuments();
+	const bookCount = await bookModel.countDocuments();
+	const issueCount = await borrowModel.countDocuments();
+
+	ok200(res, { userCount, librarianCount, genreCount, bookCount, issueCount });
 }
 
 async function addGenre(req, res, next) {
@@ -60,7 +67,14 @@ async function getUsers(req, res, next) {
 	let data = await userModel.find({ role: 'USER' });
 	ok200(res, data);
 }
-
+async function bookAnalysis(req, res, next) {
+	const books = await bookModel.find({}).lean();
+	for (let index = 0; index < books.length; index++) {
+		const element = books[index];
+		element.borrow_count = await borrowModel.countDocuments({ book: element._id });
+	}
+	ok200(res, books);
+}
 module.exports = {
 	dashboard,
 	addGenre,
@@ -70,4 +84,5 @@ module.exports = {
 	history,
 	userActivity,
 	getUsers,
+	bookAnalysis,
 };

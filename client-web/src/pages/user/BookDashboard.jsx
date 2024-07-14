@@ -3,11 +3,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchGet } from '../../utils/fetch-utils';
 import Loading from '../../components/Loading';
+import { Dropdown } from 'primereact/dropdown';
 import BookCard from '../../components/BookCard';
 
 function BookDashboard() {
 	const toast = useRef(null);
-	const [dropdownValue, setDropdownValue] = useState('all');
+	//const role = localStorage.getItem('role').toLowerCase();
+	//const [dropdownValue, setDropdownValue] = useState('all');
 	const navigate = useNavigate();
 	const [searchInput, setSearchInput] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
@@ -67,18 +69,6 @@ function BookDashboard() {
 							placeholder="Search for a book"
 							className="py-2 px-4 border rounded-md w-full"
 						/>
-					</div>
-					<div className="w-full">
-						<h1 className="text-xl font-bold mb-4">Select Genre</h1>
-						<select
-							className="border rounded p-2 mb-4 w-full"
-							value={dropdownValue}
-							onChange={(e) => setDropdownValue(e.target.value)}
-						>
-							<option value="all">All</option>
-							<option value="category1">Category 1</option>
-							<option value="category2">Category 2</option>
-						</select>
 					</div>
 				</div>
 				<button

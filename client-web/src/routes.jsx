@@ -71,7 +71,7 @@ const routes = createBrowserRouter([
 				element: <UserActivity />,
 			},
 			{
-				path: 'activity-preview',
+				path: 'activity-preview/:id',
 				element: <UserAcivityPreview />,
 			},
 			{

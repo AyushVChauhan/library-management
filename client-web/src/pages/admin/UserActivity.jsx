@@ -11,7 +11,7 @@ const UserActivity = () => {
 	const [chartData, setChartData] = useState({});
 
 	const getUsers = async () => {
-		const result = await fetchGet(role + `/genre`);
+		const result = await fetchGet(role + `/userActivity`);
 
 		if (result.success) {
 			setData(
@@ -37,7 +37,8 @@ const UserActivity = () => {
 		{
 			icon: <FaEye className="text-red-600" />,
 			onClick: (e) => {
-				navigate('/admin/activity-preview');
+				console.log(e);
+				navigate(`/admin/activity-preview/${e._id}`);
 			},
 		},
 	];

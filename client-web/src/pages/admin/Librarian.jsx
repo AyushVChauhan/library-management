@@ -98,12 +98,12 @@ const Librarian = () => {
 								onChange={(e) => setUserDetails((prev) => ({ ...prev, email: e.target.value }))}
 							/>
 							<label htmlFor={`fullname`} className="block text-sm font-bold text-gray-600">
-								Password
+								Fullname
 							</label>
 							<InputText
 								id={`fullname`}
 								name="fullname"
-								placeholder="Password"
+								placeholder="Fullname"
 								className="border rounded-md px-3 py-2 mt-1 w-full focus:outline-none focus:ring focus:border-blue-300"
 								onChange={(e) => setUserDetails((prev) => ({ ...prev, fullname: e.target.value }))}
 							/>
