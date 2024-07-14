@@ -30,6 +30,12 @@ async function newestArrival(req, res, next) {
 	const books = await bookModel.find({}).sort({ createdAt: -1 }).limit(10);
 	ok200(res, books);
 }
+async function history(req, res, next) {
+	const id = res.locals.userData._id;
+	if (!isValidObjectId(id)) throw new CustomError('Invalid Request');
+	let data = await borrowModel.find({ user: id }).populate('book').populate('transaction');
+	ok200(res, data);
+}
 
 async function payOverdue(req, res, next) {
 	const { borrowId } = req.params;
@@ -72,4 +78,4 @@ async function payOverdue(req, res, next) {
 	ok200(res, paymentIntent.client_secret);
 }
 
-module.exports = { trendingBooks, newestArrival, payOverdue };
+module.exports = { trendingBooks, newestArrival, payOverdue, history };
