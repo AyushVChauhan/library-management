@@ -9,6 +9,7 @@ import { messaging } from '../firebase/firebase-config';
 import { getToken, onMessage } from 'firebase/messaging';
 import { Toast } from 'primereact/toast';
 import { fetchPost } from '../utils/fetch-utils';
+import socket from '../utils/socket-utils';
 
 function Header({ toggleSidebar }) {
 	const username = localStorage.getItem('username');
@@ -58,7 +59,6 @@ function Header({ toggleSidebar }) {
 		return () => {
 			sub();
 			socket.disconnect();
-
 		};
 	}, []);
 
