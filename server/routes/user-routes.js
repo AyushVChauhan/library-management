@@ -2,14 +2,13 @@ const express = require('express');
 const { authMiddleware } = require('../middlewares/auth-middleware');
 const { asyncRouteHandler } = require('../utils/router-utils');
 const { verify } = require('../controllers/common-controller');
-const adminController = require('../controllers/admin-controller');
+const { dashboard } = require('../controllers/admin-controller');
 const rolesConstant = require('../constants/roles.constant');
 
 const router = express.Router();
 
-router.use(authMiddleware(rolesConstant.ADMIN));
+router.use(authMiddleware(rolesConstant.USER));
 router.get('/verify', asyncRouteHandler(verify));
-router.get('/dashboard', asyncRouteHandler(adminController.dashboard));
-router.post('/genre', asyncRouteHandler(adminController.addGenre));
+router.get('/dashboard', asyncRouteHandler(dashboard));
 
 module.exports = router;

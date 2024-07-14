@@ -34,6 +34,8 @@ app.post('/register', asyncRouteHandler(register));
 app.post('/notification-token', authMiddleware(undefined), asyncRouteHandler(updateNotificationToken));
 
 app.use('/admin', adminRoutes);
+app.use('/user', userRoutes);
+app.use('/librarian', librarianRoutes);
 // app.post('/forgot-password', asyncRouteHandler(sendToken));
 // app.post('/reset-password', asyncRouteHandler(resetPassword));
 
