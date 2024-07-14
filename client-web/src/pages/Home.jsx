@@ -4,9 +4,9 @@ import Header from '../components/Header';
 import SideBarLink from '../components/SidebarLink';
 import { Outlet } from 'react-router-dom';
 import { MdSpaceDashboard } from 'react-icons/md';
-import { FaSchool } from 'react-icons/fa';
 import { MdOutlineMenuBook } from 'react-icons/md';
 import { Toast } from 'primereact/toast';
+import { FaSwatchbook, FaUser } from 'react-icons/fa';
 function Home() {
 	const [sideBar, setSideBar] = useState(window.innerWidth > 768);
 	const [width, setWidth] = useState(window.innerWidth);
@@ -20,9 +20,14 @@ function Home() {
 					name: 'Dashboard',
 				},
 				{
-					to: '/admin/institutes',
-					iconClass: <FaSchool />,
-					name: 'Institutes',
+					to: '/admin/genre',
+					iconClass: <FaSwatchbook />,
+					name: 'Genre',
+				},
+				{
+					to: '/admin/librarians',
+					iconClass: <FaUser />,
+					name: 'Librarians',
 				},
 			],
 			'LIBRARIAN': [

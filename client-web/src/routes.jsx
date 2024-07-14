@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import Librarian from './pages/admin/Librarian';
 import Books from './pages/librarian/Books';
 import UserHome from './pages/user/UserHome';
+import Genre from './pages/admin/Genre';
 const routes = createBrowserRouter([
 	{
 		path: '/',
@@ -42,8 +43,12 @@ const routes = createBrowserRouter([
 		children: [
 			{ path: '', element: <Dashboard /> },
 			{
-				path: 'librarian',
+				path: 'librarians',
 				element: <Librarian />,
+			},
+			{
+				path: 'genre',
+				element: <Genre />,
 			},
 		],
 	},
