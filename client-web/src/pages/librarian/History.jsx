@@ -20,7 +20,6 @@ const History = () => {
 					dueDate: new Date(ele.createdAt).toLocaleDateString('en-US'),
 				}))
 			);
-			console.log(data);
 		}
 	};
 

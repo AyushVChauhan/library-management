@@ -73,6 +73,11 @@ function Home() {
 					iconClass: <FaHistory />,
 					name: 'History',
 				},
+				{
+					to: '/user/paymentDue',
+					iconClass: <FaHistory />,
+					name: 'Payment Due',
+				},
 			],
 		};
 	}, []);
