@@ -7,6 +7,7 @@ import ErrorElement from './components/ErrorElement';
 import Register from './pages/Register';
 import Librarian from './pages/admin/Librarian';
 import Books from './pages/librarian/Books';
+import Genre from './pages/admin/Genre';
 const routes = createBrowserRouter([
 	{
 		path: '/',
@@ -28,6 +29,10 @@ const routes = createBrowserRouter([
 			{
 				path: 'librarian',
 				element: <Librarian />,
+			},
+			{
+				path: 'genre',
+				element: <Genre/>,
 			},
 		],
 	},
