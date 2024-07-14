@@ -65,11 +65,6 @@ function Dashboard() {
 						count: 1,
 						iconClass: <MdOutlineMenuBook size={25} />,
 					},
-					{
-						label: 'History',
-						count: 1,
-						iconClass: <MdOutlineMenuBook size={25} />,
-					},
 				],
 			};
 			setCount(data);

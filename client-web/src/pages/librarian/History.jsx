@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const History = () => {
-	return <div>History</div>;
+	useEffect(() => {
+		getHistor();
+	}, []);
+
+	return <></>;
 };
 
 export default History;
