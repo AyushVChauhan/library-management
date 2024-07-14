@@ -26,7 +26,7 @@ function Home() {
 					name: 'Dashboard',
 				},
 				{
-					to: '/admin/institutes',
+					to: '/admin/genre',
 					iconClass: <FaSchool />,
 					name: 'Institutes',
 				},
