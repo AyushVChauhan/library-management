@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const BookCard = ({ book }) => {
-	const role = localStorage.getItem('role').toLowerCase();
+	const role = localStorage.getItem('role')?.toLowerCase();
 	const navigate = useNavigate();
 	return (
 		<div key={book._id} className="p-3 cursor-pointer shadow-md rounded-xl w-full bg-white">
@@ -26,13 +26,15 @@ const BookCard = ({ book }) => {
 					>
 						View Details
 					</button>
-					<button
-						className="bg-green-600 text-white p-2 rounded-md border-0"
-						type="button"
-						onClick={() => navigate(`borrow/${book._id}`)}
-					>
-						Borrow
-					</button>
+					{role && (
+						<button
+							className="bg-green-600 text-white p-2 rounded-md border-0"
+							type="button"
+							onClick={() => navigate(`borrow/${book._id}`)}
+						>
+							Borrow
+						</button>
+					)}
 				</div>
 			</div>
 		</div>
