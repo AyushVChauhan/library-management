@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const apiURL = "http://192.168.1.7:3000/";
+const apiURL = 'http://192.168.1.7:3000/';
 
 /**
  * Get Request to a particular route with Authorization header
@@ -10,18 +10,18 @@ const apiURL = "http://192.168.1.7:3000/";
 export async function fetchGet(pathName, { token }, router = undefined) {
 	try {
 		const request = await fetch(apiURL + pathName, {
-			method:"GET",
-			headers: { Authorization: "Bearer " + token },
+			method: 'GET',
+			headers: { Authorization: 'Bearer ' + token },
 		});
 		if (request.status == 405 && router) {
-			router.replace("/logout");
+			router.replace('/logout');
 			return;
 		}
 		const response = await request.json();
 		return response;
 	} catch (error) {
 		console.log(error);
-		return { success: false, internet: true, message: "Connection Issue" };
+		return { success: false, internet: true, message: 'Connection Issue' };
 	}
 }
 
@@ -32,50 +32,50 @@ export async function fetchGet(pathName, { token }, router = undefined) {
  * @param {String} body Jsonified String
  * @returns Jsonified response
  */
-export async function fetchPost(pathName, body, token = null, method = "POST", router = undefined) {
+export async function fetchPost(pathName, body, token = null, method = 'POST', router = undefined) {
 	try {
 		const request = await fetch(apiURL + pathName, {
 			headers: {
-				Authorization: "Bearer " + token,
-				"Content-Type": "application/json",
+				Authorization: 'Bearer ' + token,
+				'Content-Type': 'application/json',
 			},
 			method,
 			body,
 		});
 		if (request.status == 405 && router) {
-			router.replace("/logout");
+			router.replace('/logout');
 			return;
 		}
 		const response = await request.json();
 		return response;
 	} catch (error) {
 		console.log(error);
-		return { success: false, internet: true, message: "Connection" };
+		return { success: false, internet: true, message: 'Connection' };
 	}
 }
 
 export async function fetchUpload(pathName, body) {
-	const token = localStorage.getItem("token");
+	const token = localStorage.getItem('token');
 	if (!navigator.onLine) {
-		return { success: false, internet: true, message: "Connection Issue" };
+		return { success: false, internet: true, message: 'Connection Issue' };
 	}
 	try {
 		const request = await fetch(apiURL + pathName, {
 			headers: {
-				Authorization: "Bearer " + token,
+				Authorization: 'Bearer ' + token,
 			},
-			method: "POST",
+			method: 'POST',
 			body,
 		});
 		if (request.status == 405) {
-			localStorage.removeItem("role");
-			localStorage.removeItem("token");
-			window.open("/", "_self");
+			localStorage.removeItem('role');
+			localStorage.removeItem('token');
+			window.open('/login', '_self');
 			return;
 		}
 		const response = await request.json();
 		return response;
 	} catch (error) {
-		return { success: false, internet: true, message: "Connection Issue" };
+		return { success: false, internet: true, message: 'Connection Issue' };
 	}
 }

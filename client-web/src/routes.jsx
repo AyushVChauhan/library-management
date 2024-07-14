@@ -7,10 +7,30 @@ import ErrorElement from './components/ErrorElement';
 import Register from './pages/Register';
 import Librarian from './pages/admin/Librarian';
 import Books from './pages/librarian/Books';
+import UserHome from './pages/user/UserHome';
 import Genre from './pages/admin/Genre';
+import BookBorrow from './pages/librarian/BookBorrow';
+import BookBorrowForm from './pages/librarian/BookBorrowForm';
+import BookDetail from './pages/librarian/BookDetail';
+import BookReturn from './pages/librarian/BookReturn';
 const routes = createBrowserRouter([
 	{
 		path: '/',
+		element: <UserHome />,
+		errorElement: <ErrorElement />,
+		// children: [
+		// 	{
+		// 		path: '',
+		// 		element: <BookDashboard />,
+		// 	},
+		// 	{
+		// 		path: 'book/:id',
+		// 		element: <BookDetail />,
+		// 	},
+		// ],
+	},
+	{
+		path: '/login',
 		element: <Login />,
 		loader: loginLoader,
 	},
@@ -47,7 +67,33 @@ const routes = createBrowserRouter([
 				path: 'book',
 				element: <Books />,
 			},
+			{
+				path: 'book/:id',
+				element: <BookDetail />,
+			},
+			{
+				path: 'book/borrow',
+				element: <BookBorrow />,
+			},
+			{
+				path: 'book/borrow/:id',
+				element: <BookBorrowForm />,
+			},
+			{
+				path: 'bookReturn',
+				element: <BookReturn />,
+			},
 		],
+	},
+	{
+		path: '/user',
+		element: <Home />,
+		loader: verifyLoader,
+		errorElement: <ErrorElement />,
+		// children: [
+		// 	{path:'', element: <BookDashboard />},
+		// 	{path:'book/:id', element: <BookDetail />}
+		// ]
 	},
 	{
 		path: '*',

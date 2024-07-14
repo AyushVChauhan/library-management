@@ -13,7 +13,7 @@ export const verifyLoader = async () => {
 	const token = localStorage.getItem('token');
 	const role = localStorage.getItem('role')?.toLowerCase();
 	if (!token || !role) {
-		return redirect('/');
+		return redirect('/login');
 	} else {
 		const result = await fetchGet(role + '/verify');
 		if (result.success) {
@@ -21,7 +21,7 @@ export const verifyLoader = async () => {
 			return null;
 		} else {
 			localStorage.clear();
-			return redirect('/');
+			return redirect('/login');
 		}
 	}
 };
