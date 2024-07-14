@@ -49,20 +49,20 @@ function Dashboard() {
 						iconClass: <FaSchool size={25} />,
 					},
 				],
-				'INSTITUTE-HEAD': [
+				'LIBRARIAN': [
 					{
-						label: 'Departments',
-						count: result.data.departmentCount,
-						iconClass: <FaSchool size={25}></FaSchool>,
+						label: 'Books',
+						count: 10,
+						iconClass: <MdOutlineMenuBook size={25} />,
 					},
 					{
-						label: 'Teachers',
-						count: result.data.teacherCount,
+						label: 'Issued Books',
+						count: 5,
 						iconClass: <PiChalkboardTeacherFill size={25}></PiChalkboardTeacherFill>,
 					},
 					{
-						label: 'Subjects',
-						count: result.data.subjectCount,
+						label: 'Overdue Books',
+						count: 1,
 						iconClass: <MdOutlineMenuBook size={25} />,
 					},
 				],
