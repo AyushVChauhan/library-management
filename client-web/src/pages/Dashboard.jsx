@@ -25,27 +25,27 @@ function Dashboard() {
 				'ADMIN': [
 					{
 						label: 'User',
-						count: result.data.count1,
+						count: result.data.userCount,
 						iconClass: <FaSchool size={25} />,
 					},
 					{
 						label: 'Librarian',
-						count: result.data.count2,
+						count: result.data.librarianCount,
 						iconClass: <FaChalkboardTeacher size={25} />,
 					},
 					{
 						label: 'Genre',
-						count: 300,
+						count: result.data.genreCount,
 						iconClass: <PiStudentBold size={25} />,
 					},
 					{
 						label: 'Books',
-						count: 50,
+						count: result.data.bookCount,
 						iconClass: <FaSchool size={25} />,
 					},
 					{
 						label: 'Issued Books',
-						count: 70,
+						count: result.data.issueCount,
 						iconClass: <FaSchool size={25} />,
 					},
 				],

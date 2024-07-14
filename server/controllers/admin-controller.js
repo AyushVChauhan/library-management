@@ -9,7 +9,13 @@ const { randomBytes } = require('crypto');
 const rolesConstant = require('../constants/roles.constant');
 const bookModel = require('../models/books.models');
 async function dashboard(req, res, next) {
-	ok200(res, { count1: 100, count2: 200 });
+	const userCount = await userModel.countDocuments({ role: 'USER' });
+	const librarianCount = await userModel.countDocuments({ role: 'LIBRARIAN' });
+	const genreCount = await genreModel.countDocuments();
+	const bookCount = await bookModel.countDocuments();
+	const issueCount = await borrowModel.countDocuments();
+
+	ok200(res, { userCount, librarianCount, genreCount, bookCount, issueCount });
 }
 
 async function addGenre(req, res, next) {
