@@ -8,6 +8,7 @@ const { CustomError } = require('../utils/router-utils');
 const { randomBytes } = require('crypto');
 const rolesConstant = require('../constants/roles.constant');
 const bookModel = require('../models/books.models');
+const { sendMail } = require('../utils/mail-utils');
 async function dashboard(req, res, next) {
 	const userCount = await userModel.countDocuments({ role: 'USER' });
 	const librarianCount = await userModel.countDocuments({ role: 'LIBRARIAN' });
@@ -44,6 +45,7 @@ async function addLibrarian(req, res, next) {
 		fullname,
 	});
 	await librarian.save();
+	await sendMail(email, 'Registered Successfully', `username is ${username} password is ${password}`);
 	ok200(res);
 }
 

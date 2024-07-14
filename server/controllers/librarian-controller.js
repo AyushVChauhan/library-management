@@ -7,6 +7,7 @@ const userModel = require('../models/users.models');
 const borrowModel = require('../models/borrow.models');
 const { default: mongoose } = require('mongoose');
 const { sendMail } = require('../utils/mail-utils');
+const rolesConstant = require('../constants/roles.constant');
 
 async function addBook(req, res, next) {
 	const { isbn, quantity, genre } = req.body;
@@ -30,6 +31,10 @@ async function addBook(req, res, next) {
 	});
 
 	await newBook.save();
+
+	const users = await userModel.find({ is_active: 1, role: rolesConstant.USER });
+	//sendmail
+
 	ok200(res);
 }
 

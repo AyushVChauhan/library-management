@@ -121,7 +121,7 @@ async function paymentSuccess(req, res, next) {
 		`<h1>Thank you for your payment!</h1>
             <p>Your payment of ${transaction.amount} has been successfully processed.</p>`
 	);
-	ok200(res, req.query);
+	res.redirect('http://localhost:5173');
 }
 
 module.exports = { login, verify, register, updateNotificationToken, paymentSuccess };
