@@ -23,6 +23,10 @@ const transactionSchema = new mongoose.Schema(
 			type: mongoose.SchemaTypes.ObjectId,
 			ref: 'users',
 		},
+		borrow: {
+			type: mongoose.SchemaTypes.ObjectId,
+			ref: 'borrows',
+		},
 	},
 	{ timestamps: true }
 );

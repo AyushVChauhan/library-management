@@ -43,10 +43,16 @@ async function getLibrarians(req, res, next) {
 	ok200(res, librarians);
 }
 
+async function history(req, res, next) {
+	let data = await borrowModel.find().populate('book').populate('user').populate('transaction');
+	ok200(res, data);
+}
+
 module.exports = {
 	dashboard,
 	addGenre,
 	getGenre,
 	addLibrarian,
 	getLibrarians,
+	history,
 };

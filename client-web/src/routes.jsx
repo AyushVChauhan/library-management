@@ -10,28 +10,29 @@ import Books from './pages/librarian/Books';
 import UserHome from './pages/user/UserHome';
 import Genre from './pages/admin/Genre';
 import BookUsage from './pages/admin/BookUsage';
-import BookBorrow from './pages/librarian/BookBorrow';
 import BookBorrowForm from './pages/librarian/BookBorrowForm';
 import BookDetail from './pages/librarian/BookDetail';
 import BookReturn from './pages/librarian/BookReturn';
-import UserActivity from './pages/admin/UserActivity';
-import UserActivityPreview from './components/UserActivityPreview';
-import Insights from './pages/admin/Insights';
+import BookDashboard from './pages/user/BookDashboard';
+import UserBookDetail from './pages/user/UserBookDetail';
+import History from './pages/librarian/History';
+import UserHistory from './pages/user/UserHistory';
+import PaymentDue from './pages/user/PaymentDue';
 const routes = createBrowserRouter([
 	{
 		path: '/',
 		element: <UserHome />,
 		errorElement: <ErrorElement />,
-		// children: [
-		// 	{
-		// 		path: '',
-		// 		element: <BookDashboard />,
-		// 	},
-		// 	{
-		// 		path: 'book/:id',
-		// 		element: <BookDetail />,
-		// 	},
-		// ],
+		children: [
+			{
+				path: '',
+				element: <BookDashboard />,
+			},
+			{
+				path: 'book/:id',
+				element: <UserBookDetail />,
+			},
+		],
 	},
 	{
 		path: '/login',
@@ -91,10 +92,7 @@ const routes = createBrowserRouter([
 				path: 'book/:id',
 				element: <BookDetail />,
 			},
-			{
-				path: 'book/borrow',
-				element: <BookBorrow />,
-			},
+
 			{
 				path: 'book/borrow/:id',
 				element: <BookBorrowForm />,
@@ -102,6 +100,10 @@ const routes = createBrowserRouter([
 			{
 				path: 'bookReturn',
 				element: <BookReturn />,
+			},
+			{
+				path: 'history',
+				element: <History />,
 			},
 		],
 	},
@@ -114,8 +116,6 @@ const routes = createBrowserRouter([
 		// 	{path:'', element: <BookDashboard />},
 		// 	{path:'book/:id', element: <BookDetail />}
 		// ]
-	
-		
 	},
 	{
 		path: '*',
