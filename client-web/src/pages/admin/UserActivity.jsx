@@ -1,16 +1,14 @@
 import React from 'react';
-import { Toast } from 'primereact/toast';
 import { useEffect, useState, useRef } from 'react';
 import Datatable from '../../components/Datatable';
-import { redirect, useNavigate } from 'react-router-dom';
-
+import {  useNavigate } from 'react-router-dom';
 import { fetchGet } from '../../utils/fetch-utils';
 import { FaEye } from 'react-icons/fa';
-import UserActivityPreview from '../../components/UserActivityPreview';
 const UserActivity = () => {
 	const role = localStorage.getItem('role').toLowerCase();
 	const [data, setData] = useState([]);
 	const navigate = useNavigate();
+	const [chartData, setChartData] = useState({});
 
 	const getUsers = async () => {
 		const result = await fetchGet(role + `/genre`);
@@ -27,9 +25,12 @@ const UserActivity = () => {
 		}
 	};
 	
-	
+	const createCharts=()=>{
+        topFive();
+    }
 	useEffect(() => {
 		getUsers();
+        // createCharts();
 	}, []);
 	const datatableArray = [
 		{ field: 'index', header: 'Sr no.' },

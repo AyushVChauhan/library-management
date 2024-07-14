@@ -9,10 +9,14 @@ import Librarian from './pages/admin/Librarian';
 import Books from './pages/librarian/Books';
 import UserHome from './pages/user/UserHome';
 import Genre from './pages/admin/Genre';
+import BookUsage from './pages/admin/BookUsage';
 import BookBorrow from './pages/librarian/BookBorrow';
 import BookBorrowForm from './pages/librarian/BookBorrowForm';
 import BookDetail from './pages/librarian/BookDetail';
 import BookReturn from './pages/librarian/BookReturn';
+import UserActivity from './pages/admin/UserActivity';
+import UserActivityPreview from './components/UserActivityPreview';
+import Insights from './pages/admin/Insights';
 const routes = createBrowserRouter([
 	{
 		path: '/',
@@ -54,6 +58,22 @@ const routes = createBrowserRouter([
 				path: 'genre',
 				element: <Genre />,
 			},
+			{
+				path: 'book-usage',
+				element: <BookUsage/>,
+			},
+			{
+				path: 'user-activity',
+				element: <UserActivity/>,
+			},
+			{
+				path: 'activity-preview',
+				element: <UserActivityPreview/>,
+			},
+			{
+				path: 'insights',
+				element: <Insights/>,
+			},
 		],
 	},
 	{
@@ -94,6 +114,8 @@ const routes = createBrowserRouter([
 		// 	{path:'', element: <BookDashboard />},
 		// 	{path:'book/:id', element: <BookDetail />}
 		// ]
+	
+		
 	},
 	{
 		path: '*',
