@@ -15,6 +15,7 @@ import BookReturn from './pages/librarian/BookReturn';
 import BookDashboard from './pages/user/BookDashboard';
 import UserBookDetail from './pages/user/UserBookDetail';
 import History from './pages/librarian/History';
+import UserHistory from './pages/user/UserHistory';
 const routes = createBrowserRouter([
 	{
 		path: '/',
@@ -96,6 +97,7 @@ const routes = createBrowserRouter([
 		children: [
 			{ path: '', element: <BookDashboard /> },
 			{ path: 'book/:id', element: <UserBookDetail /> },
+			{ path: 'history', element: <UserHistory /> },
 		],
 	},
 	{

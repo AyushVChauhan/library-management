@@ -11,10 +11,8 @@ const BookReturn = () => {
 	const [data, setData] = useState();
 
 	const handlSubmit = async () => {
-		console.log(username);
 		const response = await fetchGet(`${role}/borrows/user/${username}`);
 		if (response.success) {
-			console.log(response);
 			setData(
 				response.data.map((ele, ind) => ({
 					...ele,
