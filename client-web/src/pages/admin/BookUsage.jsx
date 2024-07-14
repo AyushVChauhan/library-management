@@ -13,13 +13,15 @@ const BookUsage = () => {
 	const navigate = useNavigate();
 
 	const getBookInfo = async () => {
-		const result = await fetchGet(role + `/`);
+		const result = await fetchGet(role + `/book-analysis`);
 
 		if (result.success) {
 			setData(
 				result.data.map((ele, ind) => ({
 					...ele,
 					index: ind + 1,
+					author: ele.authors[0],
+					issuedby: ele.borrow_count,
 				}))
 			);
 		} else {
@@ -33,7 +35,6 @@ const BookUsage = () => {
 	const datatableArray = [
 		{ field: 'index', header: 'Sr no.' },
 		{ field: 'title', header: 'Book Name' },
-		{ field: 'genre', header: 'Genre' },
 		{ field: 'author', header: 'Author' },
 		{ field: 'issuedby', header: 'Issued by' },
 	];
