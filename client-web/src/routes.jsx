@@ -16,6 +16,7 @@ import BookDashboard from './pages/user/BookDashboard';
 import UserBookDetail from './pages/user/UserBookDetail';
 import History from './pages/librarian/History';
 import UserHistory from './pages/user/UserHistory';
+import PaymentDue from './pages/user/PaymentDue';
 const routes = createBrowserRouter([
 	{
 		path: '/',
@@ -98,6 +99,7 @@ const routes = createBrowserRouter([
 			{ path: '', element: <BookDashboard /> },
 			{ path: ':id', element: <UserBookDetail /> },
 			{ path: 'history', element: <UserHistory /> },
+			{ path: 'paymentDue', element: <PaymentDue /> },
 		],
 	},
 	{

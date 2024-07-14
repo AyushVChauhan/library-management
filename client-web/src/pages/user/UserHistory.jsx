@@ -7,7 +7,6 @@ const UserHistory = () => {
 	const [data, setData] = useState();
 	const datatableArray = [
 		{ field: 'index', header: 'Sr no.' },
-		{ field: 'fullname', header: 'FulllName' },
 		{ field: 'isbn', header: 'ISBN' },
 		{ field: 'title', header: 'Title' },
 		{ field: 'borrowDate', header: 'Borrow Date' },
@@ -26,7 +25,6 @@ const UserHistory = () => {
 					index: ind + 1,
 					isbn: ele.book.isbn,
 					title: ele.book.title,
-					fullname: ele.user.fullname,
 					borrowDate: new Date(ele.due_date).toLocaleDateString('en-US'),
 					dueDate: new Date(ele.createdAt).toLocaleDateString('en-US'),
 				}))
