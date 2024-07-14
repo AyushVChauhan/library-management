@@ -18,6 +18,7 @@ router.get('/genre', asyncRouteHandler(getGenre));
 
 router.get('/book', asyncRouteHandler(librarianController.getBooks));
 router.get('/book/:bookId', asyncRouteHandler(librarianController.getBook));
+router.get('/book/borrow/:bookId', asyncRouteHandler(librarianController.getBorrowBook));
 
 router.post('/borrow/:bookId', asyncRouteHandler(librarianController.borrowBook));
 router.get('/borrows/user/:username', asyncRouteHandler(librarianController.userBorrows));
