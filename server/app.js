@@ -10,6 +10,7 @@ const { login, register, updateNotificationToken } = require('./controllers/comm
 const { dbConnect, addAdmin } = require('./utils/database-utils');
 const adminRoutes = require('./routes/admin-routes');
 const librarianRoutes = require('./routes/librarian-routes');
+const userRoutes = require('./routes/user-routes');
 const { authMiddleware } = require('./middlewares/auth-middleware');
 const { uploadFile } = require('./utils/upload-utils');
 const { sendPushNotification } = require('./utils/push-notifications-utils');
@@ -36,7 +37,7 @@ app.post('/notification-token', authMiddleware(undefined), asyncRouteHandler(upd
 
 app.use('/admin', adminRoutes);
 app.use('/librarian', librarianRoutes);
-// app.use('/user', userRoutes);
+app.use('/user', userRoutes);
 // app.post('/forgot-password', asyncRouteHandler(sendToken));
 // app.post('/reset-password', asyncRouteHandler(resetPassword));
 
