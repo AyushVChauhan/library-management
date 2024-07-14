@@ -4,6 +4,7 @@ const { ok200 } = require('../utils/response-utils');
 const { CustomError } = require('../utils/router-utils');
 const genreModel = require('../models/genre.models');
 const userModel = require('../models/users.models');
+const borrowModel = require('../models/borrow.models');
 
 async function addBook(req, res, next) {
 	const { isbn, quantity, genre } = req.body;
@@ -82,9 +83,25 @@ async function borrowBook(req, res, next) {
 	if (!isValidObjectId(bookId)) throw new CustomError('Invalid BookId');
 	if (!due_date || new Date(due_date) <= new Date() || !username || !penalty_amount)
 		throw new CustomError('Bad Request!');
+
 	const user = await userModel.findOne({ username });
 	if (!user) throw new CustomError('Invalid user!!');
+
 	const book = await bookModel.findOne({ _id: bookId });
+	if (!book) throw new CustomError('Invalid BookId');
+
+	const userData = res.locals.userData;
+
+	const borrow = new borrowModel({
+		book: book._id,
+		due_date: new Date(due_date),
+		librarian: userData._id,
+		penalty_amount,
+		user: user._id,
+	});
+	await borrow.save();
+
+	ok200(res);
 }
 
 module.exports = { addBook, getBookFromIsbn, addBook, getBooks, borrowBook, getBook };
