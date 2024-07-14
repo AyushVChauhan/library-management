@@ -27,12 +27,12 @@ const routes = createBrowserRouter([
 		children: [
 			{ path: '', element: <Dashboard /> },
 			{
-				path: 'librarian',
+				path: 'librarians',
 				element: <Librarian />,
 			},
 			{
 				path: 'genre',
-				element: <Genre/>,
+				element: <Genre />,
 			},
 		],
 	},

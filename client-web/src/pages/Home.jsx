@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import SideBarLink from '../components/SidebarLink';
 import { Outlet } from 'react-router-dom';
 import { MdGroups, MdSpaceDashboard } from 'react-icons/md';
-import { FaSchool, FaBook } from 'react-icons/fa';
+import { FaSchool, FaBook, FaSwatchbook, FaUser } from 'react-icons/fa';
 import { PiChalkboardTeacherFill, PiStudentFill } from 'react-icons/pi';
 import { MdOutlineMenuBook } from 'react-icons/md';
 import { BiBookContent, BiLogOut } from 'react-icons/bi';
@@ -27,8 +27,13 @@ function Home() {
 				},
 				{
 					to: '/admin/genre',
-					iconClass: <FaSchool />,
-					name: 'Institutes',
+					iconClass: <FaSwatchbook />,
+					name: 'Genre',
+				},
+				{
+					to: '/admin/librarians',
+					iconClass: <FaUser />,
+					name: 'Librarians',
 				},
 				{
 					to: '/',
