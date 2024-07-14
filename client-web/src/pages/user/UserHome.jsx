@@ -20,7 +20,7 @@ function UserHome() {
 			return;
 		}
 		if (role) {
-			window.open('/' + role);
+			window.open('/' + role.toLowerCase(), '_self');
 			return;
 		}
 		setLoading(false);
