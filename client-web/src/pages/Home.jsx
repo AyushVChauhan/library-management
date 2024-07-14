@@ -36,6 +36,16 @@ function Home() {
 					name: 'Librarians',
 				},
 				{
+					to: '/admin/book-usage',
+					iconClass: <FaUser />,
+					name: 'Book Usage',
+				},
+				{
+					to: '/admin/user-activity',
+					iconClass: <FaUser />,
+					name: 'User Activity',
+				},
+				{
 					to: '/',
 					iconClass: <BiLogOut />,
 					name: 'Logout',

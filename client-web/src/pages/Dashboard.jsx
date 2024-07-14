@@ -24,27 +24,27 @@ function Dashboard() {
 			let data = {
 				'ADMIN': [
 					{
-						label: 'Institutes',
+						label: 'User',
 						count: result.data.count1,
 						iconClass: <FaSchool size={25} />,
 					},
 					{
-						label: 'Teachers',
+						label: 'Librarian',
 						count: result.data.count2,
 						iconClass: <FaChalkboardTeacher size={25} />,
 					},
 					{
-						label: 'Students',
+						label: 'Genre',
 						count: 300,
 						iconClass: <PiStudentBold size={25} />,
 					},
 					{
-						label: 'Quiz Given',
+						label: 'Books',
 						count: 50,
 						iconClass: <FaSchool size={25} />,
 					},
 					{
-						label: 'Quiz Pending',
+						label: 'Issued Books',
 						count: 70,
 						iconClass: <FaSchool size={25} />,
 					},
@@ -66,48 +66,7 @@ function Dashboard() {
 						iconClass: <MdOutlineMenuBook size={25} />,
 					},
 				],
-				'DEPARTMENT-HEAD': [
-					{
-						label: 'Students',
-						count: result.data.students,
-						iconClass: <FaSchool size={25} />,
-					},
-				],
-				'TEACHER': [
-					{
-						label: 'Completed Quiz',
-						count: result.data.completedQuizCount,
-						iconClass: <FaRegCalendarCheck size={25} />,
-					},
-					{
-						label: 'Available Quiz',
-						count: result.data.availableQuizCount,
-						iconClass: <FaRegCalendarPlus size={25} />,
-					},
-					{
-						label: 'Upcoming Quiz',
-						count: result.data.upcomingQuizCount,
-						iconClass: <LuCalendarClock size={25} />,
-					},
-
-					{
-						label: 'Subjects',
-						count: result.data.subjectCount,
-						iconClass: <FaSchool size={25} />,
-					},
-				],
-				'STUDENT': [
-					{
-						label: 'Upcoming Quiz',
-						count: result.data.upcomingQuiz,
-						iconClass: <TbCalendarTime size={25} />,
-					},
-					{
-						label: 'Available Quiz',
-						count: result.data.availableQuiz,
-						iconClass: <LuCalendarCheck2 size={25} />,
-					},
-				],
+				
 			};
 			setCount(data);
 		} else {
