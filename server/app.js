@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const http = require('node:http');
 
 const { asyncRouteHandler, errorHandler } = require('./utils/router-utils');
-const { login, register, updateNotificationToken } = require('./controllers/common-controller');
+const { login, register, updateNotificationToken, paymentSuccess } = require('./controllers/common-controller');
 const { dbConnect, addAdmin } = require('./utils/database-utils');
 const adminRoutes = require('./routes/admin-routes');
 const librarianRoutes = require('./routes/librarian-routes');
@@ -34,6 +34,7 @@ app.use(express.static('public'));
 app.post('/login', asyncRouteHandler(login));
 app.post('/register', asyncRouteHandler(register));
 app.post('/notification-token', authMiddleware(undefined), asyncRouteHandler(updateNotificationToken));
+app.get('/payment-success', asyncRouteHandler(paymentSuccess));
 
 app.use('/admin', adminRoutes);
 app.use('/librarian', librarianRoutes);
