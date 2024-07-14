@@ -1,26 +1,52 @@
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
-
-import React, { useState } from 'react';
-import { fetchPost } from '../../utils/fetch-utils';
-
+import { Toast } from 'primereact/toast';
+import React, { useEffect, useState } from 'react';
+import { fetchGet, fetchPost } from '../../utils/fetch-utils';
+import Datatable from '../../components/Datatable';
+import { useNavigate } from 'react-router-dom';
 const Librarian = () => {
+	const navigate = useNavigate();
+	const role = localStorage.getItem('role').toLowerCase();
 	const [preview, setPreview] = useState(false);
-
+	const [librarians, setLibrarians] = useState([]);
 	const [userDetails, setUserDetails] = useState({
 		username: '',
 		fullname: '',
 		email: '',
 	});
+	const datatableArray = [
+		{ field: 'index', header: 'Sr no.' },
+		{ field: 'username', header: 'UserName' },
+		{ field: 'fullname', header: 'FulllName' },
+		{ field: 'email', header: 'Email' },
+	];
+
+	const getLibrarians = async () => {
+		const response = await fetchGet(`${role}/librarian`);
+		if (response.success) {
+			setLibrarians(
+				response.data.map((ele, ind) => ({
+					...ele,
+					index: ind + 1,
+				}))
+			);
+		}
+	};
+
+	useEffect(() => {
+		getLibrarians();
+	}, []);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(userDetails);
 		try {
-			let token = localStorage.getItem('token');
-			const response = await fetchPost('admin/librarian', JSON.stringify(userDetails));
-			console.log(response);
+			const response = await fetchPost(`${role}/librarian`, JSON.stringify(userDetails));
+			if (response.success) {
+				setPreview(false);
+				window.location.reload();
+			}
 		} catch {}
 	};
 
@@ -91,6 +117,9 @@ const Librarian = () => {
 					</form>
 				</Dialog>
 			)}
+			<div className="p-10">
+				<Datatable array={datatableArray} data={librarians} />
+			</div>
 		</>
 	);
 };
