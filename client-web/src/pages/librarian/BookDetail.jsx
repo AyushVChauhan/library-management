@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchGet } from '../../utils/fetch-utils';
+import { fetchGet, fetchPost } from '../../utils/fetch-utils';
 import Loading from '../../components/Loading';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
@@ -13,54 +13,38 @@ const BookDetail = () => {
 	const role = localStorage.getItem('role').toLowerCase();
 	const [bookData, setBookData] = useState([]);
 	const [modal, setModal] = useState(false);
-	const [genre, setGenre] = useState('');
+
 	const [quantity, setQuantity] = useState('');
 	const [genreData, setGenreData] = useState([]);
+	const [genreTitle, setGenreTitle] = useState('');
 
 	const getBookData = async () => {
 		setLoading(true);
 		const result = await fetchGet(`${role}/book/${id}`);
 		if (result.success) {
-			//console.log(result.data);
+			console.log(result.data);
 			setBookData(result.data);
-			setGenre(bookData.genre.title);
-			setQuantity(bookData.quantity);
+			setGenreTitle(result.data.genre.title);
+
+			setQuantity(result.data.quantity);
 			setLoading(false);
 		}
 	};
-	const getGenreData = async () => {
-		setLoading(true);
-		const result = await fetchGet(role + '/genre');
-		if (result.success) {
-			//console.log(result.data);
-			setGenreData(
-				result.data.map((ele, ind) => ({
-					...ele,
-					index: ind + 1,
-				}))
-			);
-			setLoading(false);
-		}
-	};
+
 	const handleChangeQuantity = (e) => {
 		setQuantity(e.target.value);
 	};
-	const handleChangeGenre = (e) => {
-		setGenre(e.target.value);
-	};
+
 	const handleSubmit = async () => {
-		const result = await fetchPost(
-			localStorage.getItem('role').toLowerCase() + '/book',
-			JSON.stringify({ quantity, genre })
-		);
+		const result = await fetchPost(`${role}/book/edit/${id}`, JSON.stringify({ quantity }));
 		if (result.success) {
 			handleReset();
+			getBookData();
 		}
 	};
 	const handleReset = () => {
 		setModal(false);
-		setBookData('');
-		setGenre('');
+
 		setQuantity('');
 	};
 	const footerContent = (
@@ -81,16 +65,13 @@ const BookDetail = () => {
 				onClick={handleSubmit}
 				className="transition-all py-2 px-4 bg-darkBlue text-white rounded-md hover:bg-white hover:text-darkBlue hover:border-darkBlue hover:border-1 focus:outline-none focus:ring focus:border-blue-300"
 			>
-				ADD
+				EDIT
 			</Button>
 		</div>
 	);
 	useEffect(() => {
 		getBookData();
 	}, [id]);
-	useEffect(() => {
-		getGenreData();
-	}, []);
 
 	if (loading) return <Loading />;
 	return (
@@ -111,30 +92,13 @@ const BookDetail = () => {
 					visible={modal}
 					modal
 					onHide={() => handleReset()}
-					header="ADD BOOK"
+					header="EDIT BOOK"
 					className="w-2/3 md:w-1/3"
 					blockScroll
 					footer={footerContent}
 					draggable={false}
 				>
 					<form>
-						<div className="mb-2">
-							<label htmlFor="genre" className="block text-sm font-bold text-gray-600">
-								Select Genre
-							</label>
-							<Dropdown
-								id="genre"
-								value={genre}
-								name="genre"
-								onChange={handleChangeGenre}
-								options={genreData}
-								optionValue="_id"
-								optionLabel="title"
-								required
-								placeholder="Select a genre"
-								className="w-full md:w-14rem"
-							/>
-						</div>
 						<div>
 							<label htmlFor="isbn" className="block text-sm font-medium text-gray-600">
 								Quantity
@@ -164,12 +128,12 @@ const BookDetail = () => {
 							</div>
 							<div className="flex">
 								<div className="ms-2 mt-2 font-xl font-semibold text-darkBlue">Author(s):</div>
-								<div className="ms-2 mt-2">{bookData.authors.join(', ')}</div>
+								<div className="ms-2 mt-2">{bookData.authors && bookData.authors.join(', ')}</div>
 							</div>
 
 							<div className="flex">
 								<div className="ms-2 mt-2 font-xl font-semibold text-darkBlue">Genre:</div>
-								<div className="ms-2 mt-2">{bookData.genre.title}</div>
+								<div className="ms-2 mt-2">{genreTitle}</div>
 							</div>
 							<div className="flex">
 								<div className="ms-2 mt-2 font-xl font-semibold text-darkBlue">Year:</div>
