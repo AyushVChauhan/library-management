@@ -3,49 +3,71 @@ import { InputText } from 'primereact/inputtext';
 import React, { useState } from 'react';
 import { fetchGet, fetchPost } from '../../utils/fetch-utils';
 import Datatable from '../../components/Datatable';
-import { FaCheckCircle } from 'react-icons/fa';
+import { FaCheckCircle, FaPaypal } from 'react-icons/fa';
+import { Column } from 'primereact/column';
+const headerStyle = {
+	backgroundColor: '#002865',
+	color: 'white',
+	textAlign: 'center',
+};
 
+const cellStyle = {
+	border: '1px solid #dddddd',
+	textAlign: 'left',
+	padding: '8px',
+	width: 'fit-content',
+};
 const BookReturn = () => {
 	const role = localStorage.getItem('role');
 	const [username, setUsername] = useState([]);
 	const [data, setData] = useState();
 
 	const handlSubmit = async () => {
-		console.log(username);
 		const response = await fetchGet(`${role}/borrows/user/${username}`);
 		if (response.success) {
-			console.log(response);
 			setData(
 				response.data.map((ele, ind) => ({
 					...ele,
 					index: ind + 1,
-					isbn: ele.book.isbn,
-					title: ele.book.title,
-					fullname: ele.user.fullname,
-					borrowDate: new Date(ele.due_date).toLocaleDateString('en-US'),
-					dueDate: new Date(ele.createdAt).toLocaleDateString('en-US'),
+					createdAt: new Date(ele.createdAt).toLocaleDateString(),
+					due_date: new Date(ele.due_date).toLocaleDateString(),
 				}))
 			);
-			console.log(data);
 		}
 	};
-	const actionArray = [
-		{
-			icon: <FaCheckCircle className="text-darkBlue" size={20} />,
-			onClick: (e) => {
-				// /return/:borrowId
-				console.log(e);
-			},
-		},
-	];
+
+	const sendPaymentRequest = async (e) => {
+		await fetchGet('librarian/payment-request/' + e);
+	};
+
+	const returnBook = async (e) => {
+		await fetchGet('librarian/return/' + e);
+		handlSubmit();
+	};
+
+	const actionComponent = (
+		<Column
+			header="Action"
+			key={'Action'}
+			headerStyle={headerStyle}
+			bodyStyle={cellStyle}
+			body={(data) => {
+				if (new Date(data.due_date) < new Date()) {
+					return <FaPaypal onClick={() => sendPaymentRequest(data._id)} />;
+				} else {
+					return <FaCheckCircle onClick={() => returnBook(data._id)} />;
+				}
+			}}
+		/>
+	);
 
 	const datatableArray = [
 		{ field: 'index', header: 'Sr no.' },
-		{ field: 'fullname', header: 'FulllName' },
-		{ field: 'isbn', header: 'ISBN' },
-		{ field: 'title', header: 'Title' },
-		{ field: 'borrowDate', header: 'Borrow Date' },
-		{ field: 'dueDate', header: 'Due Date' },
+		{ field: 'user.fullname', header: 'Full name' },
+		{ field: 'book.isbn', header: 'ISBN' },
+		{ field: 'book.title', header: 'Title' },
+		{ field: 'createdAt', header: 'Borrow Date' },
+		{ field: 'due_date', header: 'Due Date' },
 	];
 
 	return (
@@ -76,7 +98,7 @@ const BookReturn = () => {
 						</div>
 					</div>
 				</div>
-				<Datatable array={datatableArray} action={actionArray} data={data} />
+				<Datatable array={datatableArray} extraComponent={actionComponent} data={data} />
 			</div>
 		</>
 	);
