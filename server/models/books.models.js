@@ -6,6 +6,10 @@ const bookSchema = new mongoose.Schema({
 	description: String,
 	thumbnail: String,
 	authors: [String],
+	publisher: String,
+	year: String,
+	quantity: Number,
+	genre: { type: mongoose.SchemaTypes.ObjectId, ref: 'genres' },
 	details: mongoose.SchemaTypes.Mixed,
 });
 const bookModel = mongoose.model('books', bookSchema);

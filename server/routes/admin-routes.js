@@ -10,6 +10,11 @@ const router = express.Router();
 router.use(authMiddleware(rolesConstant.ADMIN));
 router.get('/verify', asyncRouteHandler(verify));
 router.get('/dashboard', asyncRouteHandler(adminController.dashboard));
+
 router.post('/genre', asyncRouteHandler(adminController.addGenre));
+router.get('/genre', asyncRouteHandler(adminController.getGenre));
+
+router.post('/librarian', asyncRouteHandler(adminController.addLibrarian));
+router.get('/librarian', asyncRouteHandler(adminController.getLibrarians));
 
 module.exports = router;
