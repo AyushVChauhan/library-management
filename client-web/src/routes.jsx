@@ -18,6 +18,9 @@ import UserBookDetail from './pages/user/UserBookDetail';
 import History from './pages/librarian/History';
 import UserHistory from './pages/user/UserHistory';
 import PaymentDue from './pages/user/PaymentDue';
+import UserActivity from './pages/admin/UserActivity';
+import UserAcivityPreview from './components/UserActivityPreview';
+import Insights from './pages/admin/Insights';
 const routes = createBrowserRouter([
 	{
 		path: '/',
@@ -61,19 +64,19 @@ const routes = createBrowserRouter([
 			},
 			{
 				path: 'book-usage',
-				element: <BookUsage/>,
+				element: <BookUsage />,
 			},
 			{
 				path: 'user-activity',
-				element: <UserActivity/>,
+				element: <UserActivity />,
 			},
 			{
 				path: 'activity-preview',
-				element: <UserActivityPreview/>,
+				element: <UserAcivityPreview />,
 			},
 			{
 				path: 'insights',
-				element: <Insights/>,
+				element: <Insights />,
 			},
 		],
 	},
@@ -112,10 +115,12 @@ const routes = createBrowserRouter([
 		element: <Home />,
 		loader: verifyLoader,
 		errorElement: <ErrorElement />,
-		// children: [
-		// 	{path:'', element: <BookDashboard />},
-		// 	{path:'book/:id', element: <BookDetail />}
-		// ]
+		children: [
+			{ path: '', element: <BookDashboard /> },
+			{ path: 'book/:id', element: <UserBookDetail /> },
+			{ path: 'history', element: <UserHistory /> },
+			{ path: 'paymentDue', element: <PaymentDue /> },
+		],
 	},
 	{
 		path: '*',
