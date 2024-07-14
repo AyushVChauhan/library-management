@@ -3,6 +3,7 @@ const bookModel = require('../models/books.models');
 const { ok200 } = require('../utils/response-utils');
 const { CustomError } = require('../utils/router-utils');
 const genreModel = require('../models/genre.models');
+const userModel = require('../models/users.models');
 
 async function addBook(req, res, next) {
 	const { isbn, quantity, genre } = req.body;
@@ -67,4 +68,23 @@ async function getBooks(req, res, next) {
 	ok200(res, book);
 }
 
-module.exports = { addBook, getBookFromIsbn, addBook, getBooks };
+async function getBook(req, res, next) {
+	const { bookId } = req.params;
+	if (!isValidObjectId(bookId)) throw new CustomError('Invalid BookId');
+	const book = await bookModel.findOne({ _id: bookId }).populate('genre');
+	if (!book) throw new CustomError('Invalid BookId');
+	ok200(res, book);
+}
+
+async function borrowBook(req, res, next) {
+	const { bookId } = req.params;
+	const { due_date, username, penalty_amount } = req.body;
+	if (!isValidObjectId(bookId)) throw new CustomError('Invalid BookId');
+	if (!due_date || new Date(due_date) <= new Date() || !username || !penalty_amount)
+		throw new CustomError('Bad Request!');
+	const user = await userModel.findOne({ username });
+	if (!user) throw new CustomError('Invalid user!!');
+	const book = await bookModel.findOne({ _id: bookId });
+}
+
+module.exports = { addBook, getBookFromIsbn, addBook, getBooks, borrowBook, getBook };

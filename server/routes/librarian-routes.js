@@ -17,4 +17,7 @@ router.post('/book', asyncRouteHandler(librarianController.addBook));
 router.get('/genre', asyncRouteHandler(getGenre));
 
 router.get('/book', asyncRouteHandler(librarianController.getBooks));
+
+router.post('/borrow/:bookId', asyncRouteHandler(librarianController.borrowBook));
+router.get('/book/:bookId', asyncRouteHandler(librarianController.getBook));
 module.exports = router;
