@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
 import { useNavigate } from 'react-router-dom';
 
 const BookCard = ({ book }) => {
@@ -26,7 +26,7 @@ const BookCard = ({ book }) => {
 					>
 						View Details
 					</button>
-					{role && (
+					{role && role != 'user' && (
 						<button
 							className="bg-green-600 text-white p-2 rounded-md border-0"
 							type="button"

@@ -95,7 +95,7 @@ const routes = createBrowserRouter([
 		errorElement: <ErrorElement />,
 		children: [
 			{ path: '', element: <BookDashboard /> },
-			{ path: 'book/:id', element: <UserBookDetail /> },
+			{ path: ':id', element: <UserBookDetail /> },
 		],
 	},
 	{
