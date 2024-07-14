@@ -9,6 +9,7 @@ import Librarian from './pages/admin/Librarian';
 import Books from './pages/librarian/Books';
 import UserHome from './pages/user/UserHome';
 import Genre from './pages/admin/Genre';
+import BookUsage from './pages/admin/BookUsage';
 import BookBorrowForm from './pages/librarian/BookBorrowForm';
 import BookDetail from './pages/librarian/BookDetail';
 import BookReturn from './pages/librarian/BookReturn';
@@ -17,6 +18,9 @@ import UserBookDetail from './pages/user/UserBookDetail';
 import History from './pages/librarian/History';
 import UserHistory from './pages/user/UserHistory';
 import PaymentDue from './pages/user/PaymentDue';
+import UserActivity from './pages/admin/UserActivity';
+import UserAcivityPreview from './components/UserActivityPreview';
+import Insights from './pages/admin/Insights';
 const routes = createBrowserRouter([
 	{
 		path: '/',
@@ -58,6 +62,22 @@ const routes = createBrowserRouter([
 				path: 'genre',
 				element: <Genre />,
 			},
+			{
+				path: 'book-usage',
+				element: <BookUsage />,
+			},
+			{
+				path: 'user-activity',
+				element: <UserActivity />,
+			},
+			{
+				path: 'activity-preview',
+				element: <UserAcivityPreview />,
+			},
+			{
+				path: 'insights',
+				element: <Insights />,
+			},
 		],
 	},
 	{
@@ -97,7 +117,7 @@ const routes = createBrowserRouter([
 		errorElement: <ErrorElement />,
 		children: [
 			{ path: '', element: <BookDashboard /> },
-			{ path: ':id', element: <UserBookDetail /> },
+			{ path: 'book/:id', element: <UserBookDetail /> },
 			{ path: 'history', element: <UserHistory /> },
 			{ path: 'paymentDue', element: <PaymentDue /> },
 		],

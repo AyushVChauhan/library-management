@@ -17,4 +17,8 @@ router.get('/genre', asyncRouteHandler(adminController.getGenre));
 router.post('/librarian', asyncRouteHandler(adminController.addLibrarian));
 router.get('/librarian', asyncRouteHandler(adminController.getLibrarians));
 
+router.get('/history', asyncRouteHandler(adminController.history));
+router.get('/userActivity', asyncRouteHandler(adminController.getUsers));
+router.get('/userActivity/:id', asyncRouteHandler(adminController.userActivity));
+
 module.exports = router;

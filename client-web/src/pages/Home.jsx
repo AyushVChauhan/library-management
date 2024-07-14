@@ -39,6 +39,11 @@ function Home() {
 					iconClass: <FaUser />,
 					name: 'User Activity',
 				},
+				{
+					to: '/admin/insights',
+					iconClass: <FaUser />,
+					name: 'Insights',
+				},
 			],
 			'LIBRARIAN': [
 				{

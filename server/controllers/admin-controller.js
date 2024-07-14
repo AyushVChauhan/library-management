@@ -1,7 +1,9 @@
 const md5 = require('md5');
 const genreModel = require('../models/genre.models');
+const { default: mongoose, isValidObjectId } = require('mongoose');
 const userModel = require('../models/users.models');
 const { ok200 } = require('../utils/response-utils');
+const borrowModel = require('../models/borrow.models');
 const { CustomError } = require('../utils/router-utils');
 const { randomBytes } = require('crypto');
 const rolesConstant = require('../constants/roles.constant');
@@ -43,10 +45,29 @@ async function getLibrarians(req, res, next) {
 	ok200(res, librarians);
 }
 
+async function history(req, res, next) {
+	let data = await borrowModel.find().populate('book').populate('user').populate('transaction');
+	ok200(res, data);
+}
+async function userActivity(req, res, next) {
+	const { id } = req.params;
+	console.log(id);
+	if (!isValidObjectId(id)) throw new CustomError('Invalid Request');
+	let data = await borrowModel.find({ user: id }).populate('book').populate('transaction');
+	ok200(res, data);
+}
+async function getUsers(req, res, next) {
+	let data = await userModel.find({ role: 'USER' });
+	ok200(res, data);
+}
+
 module.exports = {
 	dashboard,
 	addGenre,
 	getGenre,
 	addLibrarian,
 	getLibrarians,
+	history,
+	userActivity,
+	getUsers,
 };
