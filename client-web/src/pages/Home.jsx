@@ -46,6 +46,11 @@ function Home() {
 					iconClass: <FaWpforms />,
 					name: 'Book Borrow',
 				},
+				{
+					to: '/librarian/bookReturn',
+					iconClass: <FaWpforms />,
+					name: 'Book Return',
+				},
 			],
 			'USER': [
 				{

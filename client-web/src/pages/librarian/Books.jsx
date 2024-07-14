@@ -20,6 +20,7 @@ function Books() {
 	const [genreData, setGenreData] = useState([]);
 	const [genre, setGenre] = useState('');
 	const [quantity, setQuantity] = useState('');
+	const [filter, setFilter] = useState();
 	const navigate = useNavigate();
 	const toast = useRef(null);
 
@@ -81,6 +82,15 @@ function Books() {
 			}
 		}
 	};
+
+	const filterBooks = async () => {
+		const result = await fetchGet(`${role}/book?search=${filter}`);
+		console.log(result);
+		if (result.success) {
+			setBooks(result.data);
+		}
+	};
+
 	useEffect(() => {
 		getGenreData();
 		getBooks();
@@ -124,6 +134,7 @@ function Books() {
 					>
 						ADD BOOK
 					</Button>
+
 					<Dialog
 						visible={modal}
 						modal
@@ -150,6 +161,7 @@ function Books() {
 									className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-0 focus:border-blue-300 focus:border-4"
 								/>
 							</div>
+
 							{bookData && (
 								<>
 									<div>
@@ -219,11 +231,36 @@ function Books() {
 					</Dialog>
 				</div>
 			</div>
+			<div className="flex items-center justify-center my-5">
+				<div className="mt-5 flex items-center justify-center w-1/2 gap-5">
+					<div className="w-full">
+						<InputText
+							id={`search`}
+							onChange={(e) => {
+								setFilter(e.target.value);
+							}}
+							name="search"
+							placeholder="Search"
+							className="border rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300"
+						/>
+					</div>
+					<div>
+						<Button
+							onClick={filterBooks}
+							type="button"
+							className="transition-all py-2 px-4 bg-darkBlue text-white rounded-md hover:bg-white hover:text-darkBlue hover:border-darkBlue hover:border-1 focus:outline-none focus:ring focus:border-blue-300 "
+						>
+							Submit
+						</Button>
+					</div>
+				</div>
+			</div>
+
 			<div className="p-5">
 				<div className="grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 					{books &&
 						books.map((ele) => {
-							return <BookCard book={ele} />;
+							return <BookCard key={ele._id} book={ele} />;
 						})}
 				</div>
 			</div>

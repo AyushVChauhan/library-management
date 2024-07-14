@@ -11,6 +11,8 @@ import UserHome from './pages/user/UserHome';
 import Genre from './pages/admin/Genre';
 import BookBorrow from './pages/librarian/BookBorrow';
 import BookBorrowForm from './pages/librarian/BookBorrowForm';
+import BookDetail from './pages/librarian/BookDetail';
+import BookReturn from './pages/librarian/BookReturn';
 const routes = createBrowserRouter([
 	{
 		path: '/',
@@ -66,12 +68,20 @@ const routes = createBrowserRouter([
 				element: <Books />,
 			},
 			{
+				path: 'book/:id',
+				element: <BookDetail />,
+			},
+			{
 				path: 'book/borrow',
 				element: <BookBorrow />,
 			},
 			{
 				path: 'book/borrow/:id',
 				element: <BookBorrowForm />,
+			},
+			{
+				path: 'bookReturn',
+				element: <BookReturn />,
 			},
 		],
 	},
