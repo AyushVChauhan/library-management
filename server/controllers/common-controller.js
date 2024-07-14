@@ -103,4 +103,9 @@ async function resetPassword(req, res, next) {
 	ok200(res);
 }
 
-module.exports = { login, verify, register, updateNotificationToken };
+async function paymentSuccess(req, res, next) {
+	console.log(req.query);
+	ok200(res, req.query);
+}
+
+module.exports = { login, verify, register, updateNotificationToken, paymentSuccess };

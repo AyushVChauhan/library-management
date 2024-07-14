@@ -29,6 +29,16 @@ function Home() {
 					iconClass: <FaUser />,
 					name: 'Librarians',
 				},
+				{
+					to: '/admin/book-usage',
+					iconClass: <FaUser />,
+					name: 'Book Usage',
+				},
+				{
+					to: '/admin/user-activity',
+					iconClass: <FaUser />,
+					name: 'User Activity',
+				},
 			],
 			'LIBRARIAN': [
 				{
@@ -41,11 +51,7 @@ function Home() {
 					iconClass: <MdOutlineMenuBook />,
 					name: 'Books',
 				},
-				{
-					to: '/librarian/book/borrow',
-					iconClass: <FaWpforms />,
-					name: 'Book Borrow',
-				},
+
 				{
 					to: '/librarian/bookReturn',
 					iconClass: <FaWpforms />,

@@ -157,7 +157,7 @@ function Datatable({ data, array, action = [], onRowClick = () => {}, extraCompo
 							);
 						}
 					})}
-					{action.length && (
+					{action.length>0 && (
 						<Column
 							headerStyle={headerStyle}
 							bodyStyle={cellStyle}

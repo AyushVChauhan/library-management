@@ -33,6 +33,17 @@ async function addBook(req, res, next) {
 	ok200(res);
 }
 
+async function editBook(req, res, next) {
+	const { bookId } = req.params;
+	if (!isValidObjectId(bookId)) throw new CustomError('Invalid book');
+	const { quantity } = req.body;
+	const book = await bookModel.findOne({ _id: bookId });
+	if (!book) throw new CustomError('Invalid Book');
+	book.quantity = quantity;
+	await book.save();
+	ok200(res);
+}
+
 async function getBookFromIsbn(req, res, next) {
 	const { isbn } = req.params;
 	const result = await fetch('https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn);
@@ -182,4 +193,5 @@ module.exports = {
 	sendPaymentRequest,
 	returnBook,
 	getBorrowBook,
+	editBook,
 };

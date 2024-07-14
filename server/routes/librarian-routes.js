@@ -14,6 +14,7 @@ router.get('/dashboard', asyncRouteHandler(dashboard));
 
 router.get('/book/get/:isbn', asyncRouteHandler(librarianController.getBookFromIsbn));
 router.post('/book', asyncRouteHandler(librarianController.addBook));
+router.post('/book/edit/:bookId', asyncRouteHandler(librarianController.editBook));
 router.get('/genre', asyncRouteHandler(getGenre));
 
 router.get('/book', asyncRouteHandler(librarianController.getBooks));
