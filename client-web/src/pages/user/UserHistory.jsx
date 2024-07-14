@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { fetchGet } from '../../utils/fetch-utils';
 import Datatable from '../../components/Datatable';
+import { fetchGet } from '../../utils/fetch-utils';
 
-const History = () => {
+const UserHistory = () => {
 	const role = localStorage.getItem('role').toLowerCase();
 	const [data, setData] = useState();
+	const datatableArray = [
+		{ field: 'index', header: 'Sr no.' },
+		{ field: 'fullname', header: 'FulllName' },
+		{ field: 'isbn', header: 'ISBN' },
+		{ field: 'title', header: 'Title' },
+		{ field: 'borrowDate', header: 'Borrow Date' },
+		{ field: 'dueDate', header: 'Due Date' },
+	];
+	useEffect(() => {
+		getHistory();
+	}, []);
 
 	const getHistory = async () => {
 		const response = await fetchGet(`${role}/history`);
@@ -23,20 +34,6 @@ const History = () => {
 			console.log(data);
 		}
 	};
-
-	const datatableArray = [
-		{ field: 'index', header: 'Sr no.' },
-		{ field: 'fullname', header: 'FulllName' },
-		{ field: 'isbn', header: 'ISBN' },
-		{ field: 'title', header: 'Title' },
-		{ field: 'borrowDate', header: 'Borrow Date' },
-		{ field: 'dueDate', header: 'Due Date' },
-	];
-
-	useEffect(() => {
-		getHistory();
-	}, []);
-
 	return (
 		<>
 			<div className="flex justify-between items-center">
@@ -47,4 +44,4 @@ const History = () => {
 	);
 };
 
-export default History;
+export default UserHistory;

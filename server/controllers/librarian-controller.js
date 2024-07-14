@@ -43,6 +43,10 @@ async function editBook(req, res, next) {
 	await book.save();
 	ok200(res);
 }
+async function history(req, res, next) {
+	let data = await borrowModel.find().populate('book').populate('user').populate('transaction');
+	ok200(res, data);
+}
 
 async function getBookFromIsbn(req, res, next) {
 	const { isbn } = req.params;
@@ -194,4 +198,5 @@ module.exports = {
 	returnBook,
 	getBorrowBook,
 	editBook,
+	history,
 };

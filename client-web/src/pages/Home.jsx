@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 import { MdSpaceDashboard } from 'react-icons/md';
 import { MdOutlineMenuBook } from 'react-icons/md';
 import { Toast } from 'primereact/toast';
-import { FaSwatchbook, FaUser, FaWpforms } from 'react-icons/fa';
+import { FaHistory, FaSwatchbook, FaUser, FaWpforms } from 'react-icons/fa';
 function Home() {
 	const [sideBar, setSideBar] = useState(window.innerWidth > 768);
 	const [width, setWidth] = useState(window.innerWidth);
@@ -51,11 +51,15 @@ function Home() {
 					iconClass: <MdOutlineMenuBook />,
 					name: 'Books',
 				},
-
 				{
 					to: '/librarian/bookReturn',
 					iconClass: <FaWpforms />,
 					name: 'Book Return',
+				},
+				{
+					to: '/librarian/history',
+					iconClass: <FaWpforms />,
+					name: 'History',
 				},
 			],
 			'USER': [
@@ -63,6 +67,11 @@ function Home() {
 					to: '/user',
 					iconClass: <MdSpaceDashboard />,
 					name: 'Dashboard',
+				},
+				{
+					to: '/user/history',
+					iconClass: <FaHistory />,
+					name: 'History',
 				},
 			],
 		};
