@@ -11,4 +11,9 @@ router.use(authMiddleware(rolesConstant.USER));
 router.get('/verify', asyncRouteHandler(verify));
 router.get('/dashboard', asyncRouteHandler(dashboard));
 
+//trending
+//new arrival
+//request book
+//filter books
+
 module.exports = router;
