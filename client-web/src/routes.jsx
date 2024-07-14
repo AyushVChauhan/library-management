@@ -13,21 +13,23 @@ import BookBorrow from './pages/librarian/BookBorrow';
 import BookBorrowForm from './pages/librarian/BookBorrowForm';
 import BookDetail from './pages/librarian/BookDetail';
 import BookReturn from './pages/librarian/BookReturn';
+import BookDashboard from './pages/user/BookDashboard';
+import UserBookDetail from './pages/user/UserBookDetail';
 const routes = createBrowserRouter([
 	{
 		path: '/',
 		element: <UserHome />,
 		errorElement: <ErrorElement />,
-		// children: [
-		// 	{
-		// 		path: '',
-		// 		element: <BookDashboard />,
-		// 	},
-		// 	{
-		// 		path: 'book/:id',
-		// 		element: <BookDetail />,
-		// 	},
-		// ],
+		children: [
+			{
+				path: '',
+				element: <BookDashboard />,
+			},
+			{
+				path: 'book/:id',
+				element: <UserBookDetail />,
+			},
+		],
 	},
 	{
 		path: '/login',
@@ -90,10 +92,10 @@ const routes = createBrowserRouter([
 		element: <Home />,
 		loader: verifyLoader,
 		errorElement: <ErrorElement />,
-		// children: [
-		// 	{path:'', element: <BookDashboard />},
-		// 	{path:'book/:id', element: <BookDetail />}
-		// ]
+		children: [
+			{ path: '', element: <BookDashboard /> },
+			{ path: 'book/:id', element: <UserBookDetail /> },
+		],
 	},
 	{
 		path: '*',
