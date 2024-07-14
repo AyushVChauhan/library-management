@@ -25,6 +25,8 @@ router.post('/borrow/:bookId', asyncRouteHandler(librarianController.borrowBook)
 router.get('/borrows/user/:username', asyncRouteHandler(librarianController.userBorrows));
 router.get('/borrows/book/:bookId', asyncRouteHandler(librarianController.bookBorrows));
 
+router.get('/history', asyncRouteHandler(librarianController.history));
+
 router.get('/payment-request/:borrowId', asyncRouteHandler(librarianController.sendPaymentRequest));
 router.get('/return/:borrowId', asyncRouteHandler(librarianController.returnBook));
 module.exports = router;
