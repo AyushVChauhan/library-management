@@ -41,11 +41,7 @@ function Home() {
 					iconClass: <MdOutlineMenuBook />,
 					name: 'Books',
 				},
-				{
-					to: '/librarian/book/borrow',
-					iconClass: <FaWpforms />,
-					name: 'Book Borrow',
-				},
+
 				{
 					to: '/librarian/bookReturn',
 					iconClass: <FaWpforms />,
