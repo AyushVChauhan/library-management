@@ -1,15 +1,17 @@
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import React, { useState } from 'react';
-import { fetchPost } from '../../utils/fetch-utils';
+import { fetchGet, fetchPost } from '../../utils/fetch-utils';
 
 const BookReturn = () => {
+	const role = localStorage.getItem('role');
 	const [username, setUsername] = useState();
 	const [data, setData] = useState([]);
 
 	const handlSubmit = async () => {
 		console.log(username);
-		const response = await fetchPost(`${role}/`, username);
+		const response = await fetchGet(`${role}/borrows/user/${username}`);
+		console.log(response);
 	};
 	return (
 		<>
