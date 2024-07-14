@@ -34,45 +34,33 @@ const Insights = () => {
 		getUsers();
         createCharts();
 	}, []);
-	const labels = ["January", "February", "March", "April", "May", "June", "July"];
+	const labels = ["January", "February", "March", "April", "May", "June", "July","August","September","Octobor","November","December"];
 const datasets = [
   {
-    label: "First Dataset",
-    data: [65, 59, 80, 81, 56, 55, 40],
+    label: "Monthly Book Borrowed",
+    data: [65, 59, 80, 81, 56, 55, 40,89,56,37,56,12],
     fill: false,
     borderColor: getComputedStyle(document.documentElement).getPropertyValue("--blue-500"),
     tension: 0.4,
   },
-//   {
-//     label: "Second Dataset",
-//     data: [28, 48, 40, 19, 86, 27, 90],
-//     fill: false,
-//     borderColor: getComputedStyle(document.documentElement).getPropertyValue("--pink-500"),
-//     tension: 0.4,
-//   },
+
 ];
-const labels1 = ["January", "February", "March", "April", "May", "June", "July"];
+const labels1 = ["January", "February", "March", "April", "May", "June", "July","August","September","Octobor","November","December"];
 const datasets1 = [
   {
-    label: "First Dataset",
-    data: [65, 59, 80, 81, 56, 55, 40],
+    label: "Monthly book overdue",
+    data: [20, 59, 50, 31, 46, 65, 80,90,10,30,70,56],
     fill: false,
     borderColor: getComputedStyle(document.documentElement).getPropertyValue("--blue-500"),
     tension: 0.4,
   },
-  {
-    label: "Second Dataset",
-    data: [28, 48, 40, 19, 86, 27, 90],
-    fill: false,
-    borderColor: getComputedStyle(document.documentElement).getPropertyValue("--pink-500"),
-    tension: 0.4,
-  },
+ 
 ];
 
-   const labels4= ["A", "B", "C"];
+   const labels4= ["Romantic", "Action", "Comedy"];
    const datasets4 = [
     {
-        data: [540, 325, 702],
+        data: [5, 3, 7],
         backgroundColor: [
             getComputedStyle(document.documentElement).getPropertyValue("--blue-500"),
             getComputedStyle(document.documentElement).getPropertyValue("--yellow-500"),
@@ -85,8 +73,24 @@ const datasets1 = [
         ],
     },
 ];
-const labels5= ["A", "B", "C"];
+const labels5= ["Overdue", "Not Overdued"];
 const datasets5 = [
+ {
+     data: [80,20],
+     backgroundColor: [
+         getComputedStyle(document.documentElement).getPropertyValue("--blue-500"),
+         getComputedStyle(document.documentElement).getPropertyValue("--yellow-500"),
+         getComputedStyle(document.documentElement).getPropertyValue("--green-500"),
+     ],
+     hoverBackgroundColor: [
+         getComputedStyle(document.documentElement).getPropertyValue("--blue-400"),
+         getComputedStyle(document.documentElement).getPropertyValue("--yellow-400"),
+         getComputedStyle(document.documentElement).getPropertyValue("--green-400"),
+     ],
+ },
+];
+const labels7= ["Overdue", "Not Overdued"];
+const datasets7= [
  
     {
         label: "First Dataset",
@@ -138,14 +142,14 @@ const type='horizontal';
                         <div className="rounded-xl shadow-md h-[55vh] p-5 bg-white">
                     <div className="text-2xl font-bold">Book Overdue Statistics</div>
                     <div className='flex justify-center items-center'>
-							<PieChart labels={labels4} datasets={datasets4}/>
+							<PieChart labels={labels5} datasets={datasets5}/>
                             </div>
 						</div>
                         </div>
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5  py-5">
 						<div className="rounded-xl shadow-md h-[55vh] p-5 bg-white ">
                     <div className="text-2xl font-bold">Best Seller</div>
-                    <BarChart labels={labels} datasets={datasets} type={type}/>
+                    <BarChart labels={labels7} datasets={datasets7} type={type}/>
                         </div>
                         <div className="rounded-xl shadow-md h-[55vh] p-5 bg-white ">
                         <div className="text-2xl font-bold">Payment Insights</div>
@@ -156,11 +160,6 @@ const type='horizontal';
                             <h1 className='text-2xl font-bold text-center'>144</h1>
                             </div>
                         
-                        <div className="rounded-xl shadow-md h-[25vh] p-5 bg-white ">
-                    <div className="text-2xl font-bold">Payment remaining</div>
-                            <h1 className='text-2xl font-bold text-center'>154</h1>
-        
-                        </div>
                         </div>
                         </div>
                         </div>
