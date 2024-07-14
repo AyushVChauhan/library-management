@@ -2,13 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { fetchGet, fetchPost } from '../../utils/fetch-utils';
 import Loading from '../../components/Loading';
 import { Toast } from 'primereact/toast';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { InputText } from 'primereact/inputtext';
 import { Calendar } from 'primereact/calendar';
 import { Button } from 'primereact/button';
 
 function BookBorrowForm() {
-	const id = '66935ce1d7f65c32c420bb0a';
+	const { id } = useParams();
 	const role = localStorage.getItem('role').toLowerCase();
 	const [loading, setLoading] = useState(true);
 	const [bookData, setBookData] = useState([]);
@@ -51,7 +51,7 @@ function BookBorrowForm() {
 			<Toast ref={toast} />
 			<div className="px-10">
 				<div className="flex justify-between items-center">
-					<div className="text-4xl font-bold">Book Borrow</div>
+					<div className="text-4xl font-bold text-darkBlue">Book Borrow</div>
 				</div>
 				<div className="mb-3">
 					<div className="flex flex-row">

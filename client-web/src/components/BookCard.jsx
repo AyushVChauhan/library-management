@@ -26,6 +26,13 @@ const BookCard = ({ book }) => {
 					>
 						View Details
 					</button>
+					<button
+						className="bg-darkBlue text-white p-2 rounded-md border-0"
+						type="button"
+						onClick={() => navigate(`borrow/${book._id}`)}
+					>
+						Borrow
+					</button>
 				</div>
 			</div>
 		</div>
