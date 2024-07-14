@@ -8,6 +8,7 @@ const borrowSchema = new mongoose.Schema(
 		due_date: Date,
 		return_date: Date,
 		due_payment: { type: mongoose.SchemaTypes.ObjectId, ref: 'payments' },
+		penalty_amount: Number, //per day
 	},
 	{ timestamps: true }
 );
