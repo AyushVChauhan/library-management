@@ -6,6 +6,7 @@ const genreModel = require('../models/genre.models');
 const userModel = require('../models/users.models');
 const borrowModel = require('../models/borrow.models');
 const { default: mongoose } = require('mongoose');
+const { sendMail } = require('../utils/mail-utils');
 
 async function addBook(req, res, next) {
 	const { isbn, quantity, genre } = req.body;
@@ -128,4 +129,41 @@ async function bookBorrows(req, res, next) {
 	ok200(res, borrows);
 }
 
-module.exports = { addBook, getBookFromIsbn, addBook, getBooks, borrowBook, getBook, userBorrows, bookBorrows };
+async function sendPaymentRequest(req, res, next) {
+	const { borrowId } = req.params;
+	if (!isValidObjectId(borrowId)) throw new CustomError('Invalid Request');
+	const borrow = await borrowModel.findOne({ _id: borrowId });
+	borrow.can_pay = true;
+	await borrow.save();
+	await borrow.populate('user');
+	await sendMail(borrow.user.email, 'Due date', 'Please pay the overdue penalty amount here!');
+	ok200(res);
+}
+
+async function returnBook(req, res, next) {
+	const { borrowId } = req.params;
+	if (!isValidObjectId(borrowId)) throw new CustomError('Invalid Request');
+
+	const today = new Date();
+	const borrow = await borrowModel.findOne({ _id: borrowId });
+	if (!borrow) throw new CustomError('Invalid BorrowId');
+
+	if (borrow.due_date < today && !borrow.payment_status) throw new CustomError('Panalty not submitted');
+
+	borrow.return_date = today;
+	await borrow.save();
+	ok200(res);
+}
+
+module.exports = {
+	addBook,
+	getBookFromIsbn,
+	addBook,
+	getBooks,
+	borrowBook,
+	getBook,
+	userBorrows,
+	bookBorrows,
+	sendPaymentRequest,
+	returnBook,
+};

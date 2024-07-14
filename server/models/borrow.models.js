@@ -7,10 +7,9 @@ const borrowSchema = new mongoose.Schema(
 		librarian: { type: mongoose.SchemaTypes.ObjectId, ref: 'users' },
 		due_date: Date,
 		return_date: Date,
-		due_payment: {
-			status: Boolean,
-			last_transaction: { type: mongoose.SchemaTypes.ObjectId, ref: 'transactions' },
-		},
+		payment_status: Boolean,
+		transaction: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'transactions' }],
+		can_pay: { type: Boolean, default: false },
 		penalty_amount: Number, //per day
 	},
 	{ timestamps: true }
