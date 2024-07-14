@@ -21,7 +21,7 @@ function BookBorrowForm() {
 
 	const getBookData = async () => {
 		setLoading(true);
-		const result = await fetchGet(`${role}/book/${id}`);
+		const result = await fetchGet(`${role}/book/borrow/${id}`);
 		if (result.success) {
 			console.log(result.data);
 			setBookData(result.data);

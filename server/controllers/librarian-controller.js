@@ -79,6 +79,17 @@ async function getBook(req, res, next) {
 	ok200(res, book);
 }
 
+async function getBorrowBook(req, res, next) {
+	const { bookId } = req.params;
+	if (!isValidObjectId(bookId)) throw new CustomError('Invalid BookId');
+	const book = await bookModel.findOne({ _id: bookId }).populate('genre').lean();
+	if (!book) throw new CustomError('Invalid BookId');
+	const borrows = await borrowModel.countDocuments({ book: book._id, return_date: { $exists: false } });
+	book.quantity -= borrows;
+	if (book.quantity < 0) book.quantity = 0;
+	ok200(res, book);
+}
+
 async function borrowBook(req, res, next) {
 	const { bookId } = req.params;
 	const { due_date, username, penalty_amount } = req.body;
@@ -111,12 +122,16 @@ async function borrowBook(req, res, next) {
 
 async function userBorrows(req, res, next) {
 	const { username } = req.params;
-	const user = await userModel.findOne({ _id: username });
+	const user = await userModel.findOne({ username: username });
 	if (!user) {
 		ok200(res, []);
 		return;
 	}
-	const borrows = await borrowModel.find({ return_date: { $exists: false } }).sort({ due_date: 1 });
+	const borrows = await borrowModel
+		.find({ return_date: { $exists: false } })
+		.sort({ due_date: 1 })
+		.populate('user')
+		.populate('book');
 	ok200(res, borrows);
 }
 
@@ -166,4 +181,5 @@ module.exports = {
 	bookBorrows,
 	sendPaymentRequest,
 	returnBook,
+	getBorrowBook,
 };
