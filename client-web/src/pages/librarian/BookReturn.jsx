@@ -29,6 +29,7 @@ const BookReturn = () => {
 				response.data.map((ele, ind) => ({
 					...ele,
 					index: ind + 1,
+					d1: ele.due_date,
 					createdAt: new Date(ele.createdAt).toLocaleDateString(),
 					due_date: new Date(ele.due_date).toLocaleDateString(),
 				}))
@@ -52,7 +53,8 @@ const BookReturn = () => {
 			headerStyle={headerStyle}
 			bodyStyle={cellStyle}
 			body={(data) => {
-				if (new Date(data.due_date) < new Date()) {
+				console.log(data);
+				if (new Date(data.d1) < new Date()) {
 					return <FaPaypal onClick={() => sendPaymentRequest(data._id)} />;
 				} else {
 					return <FaCheckCircle onClick={() => returnBook(data._id)} />;
