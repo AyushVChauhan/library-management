@@ -127,7 +127,11 @@ async function userBorrows(req, res, next) {
 		ok200(res, []);
 		return;
 	}
-	const borrows = await borrowModel.find({ return_date: { $exists: false } }).sort({ due_date: 1 });
+	const borrows = await borrowModel
+		.find({ return_date: { $exists: false } })
+		.sort({ due_date: 1 })
+		.populate('user')
+		.populate('book');
 	ok200(res, borrows);
 }
 
