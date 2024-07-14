@@ -7,10 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import { InputText } from 'primereact/inputtext';
 import { fetchGet, fetchPost } from '../../utils/fetch-utils';
 import { Dropdown } from 'primereact/dropdown';
+import BookCard from '../../components/BookCard';
 
 function Books() {
 	const role = localStorage.getItem('role').toLowerCase();
 	const [loading, setLoading] = useState(true);
+	const [books, setBooks] = useState([]);
 	const [isbn, setIsbn] = useState('');
 	const [modal, setModal] = useState(false);
 	const [data, setData] = useState('');
@@ -20,6 +22,14 @@ function Books() {
 	const [quantity, setQuantity] = useState('');
 	const navigate = useNavigate();
 	const toast = useRef(null);
+
+	const getBooks = async () => {
+		const response = await fetchGet(`${role}/book`);
+		if (response.success) {
+			setBooks(response.data);
+		}
+		console.log(books);
+	};
 
 	const getGenreData = async () => {
 		setLoading(true);
@@ -73,6 +83,7 @@ function Books() {
 	};
 	useEffect(() => {
 		getGenreData();
+		getBooks();
 	}, []);
 
 	const footerContent = (
@@ -206,6 +217,14 @@ function Books() {
 							)}
 						</form>
 					</Dialog>
+				</div>
+			</div>
+			<div className="p-5">
+				<div className="grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+					{books &&
+						books.map((ele) => {
+							return <BookCard book={ele} />;
+						})}
 				</div>
 			</div>
 		</>

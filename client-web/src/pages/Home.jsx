@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 import { MdSpaceDashboard } from 'react-icons/md';
 import { MdOutlineMenuBook } from 'react-icons/md';
 import { Toast } from 'primereact/toast';
-import { FaSwatchbook, FaUser } from 'react-icons/fa';
+import { FaSwatchbook, FaUser, FaWpforms } from 'react-icons/fa';
 function Home() {
 	const [sideBar, setSideBar] = useState(window.innerWidth > 768);
 	const [width, setWidth] = useState(window.innerWidth);
@@ -40,6 +40,11 @@ function Home() {
 					to: '/librarian/book',
 					iconClass: <MdOutlineMenuBook />,
 					name: 'Books',
+				},
+				{
+					to: '/librarian/book/borrow',
+					iconClass: <FaWpforms />,
+					name: 'Book Borrow',
 				},
 			],
 			'USER': [
