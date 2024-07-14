@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { InputText } from 'primereact/inputtext';
 import { Calendar } from 'primereact/calendar';
 import { Button } from 'primereact/button';
+import { Fieldset } from 'primereact/fieldset';
 
 function BookBorrowForm() {
 	const id = '66935ce1d7f65c32c420bb0a';
@@ -39,7 +40,7 @@ function BookBorrowForm() {
 			JSON.stringify({ due_date: dueDate, username, penalty_amount: fee })
 		);
 		if (result.success) {
-			navigate('/');
+			navigate('/librarian');
 		}
 	};
 	useEffect(() => {
@@ -94,51 +95,58 @@ function BookBorrowForm() {
 						<div className="ms-2 mt-2">{bookData.quantity}</div>
 					</div>
 				</div>
-				<div>
-					<label htmlFor="username" className="block text-sm font-medium text-gray-600">
-						Username
-					</label>
-					<InputText
-						type="text"
-						id="username"
-						name="username"
-						value={username}
-						onChange={handleChangeUsername}
-						placeholder="Enter the username"
-						className="w-1/2 mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-0 focus:border-blue-300 focus:border-4"
-					/>
-				</div>
-				<div>
-					<label htmlFor="duedate" className="block text-sm font-medium text-gray-600">
-						Due Date
-					</label>
-					<Calendar value={dueDate} onChange={(e) => setDueDate(e.value)} />
-				</div>
-				<div>
-					<label htmlFor="fee" className="block text-sm font-medium text-gray-600">
-						Penalty Fee for overdue
-					</label>
-					<InputText
-						type="number"
-						id="fee"
-						name="fee"
-						value={fee}
-						onChange={handleChangeFee}
-						min={1}
-						placeholder="Enter the fee"
-						className="w-1/2 mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-0 focus:border-blue-300 focus:border-4"
-					/>
-					<div className="text-sm">Fees will be increased by 10 everyday</div>
-				</div>
-				<Button
-					color="primary"
-					loading={loading}
-					disabled={loading}
-					onClick={handleSubmit}
-					className="transition-all py-2 px-4 bg-darkBlue text-white rounded-md hover:bg-white hover:text-darkBlue hover:border-darkBlue hover:border-1 focus:outline-none focus:ring focus:border-blue-300"
-				>
-					ADD
-				</Button>
+				<Fieldset legend="Borrow Form">
+					<div className="mb-2">
+						<label htmlFor="username" className="block text-sm font-medium text-gray-600">
+							Username
+						</label>
+						<InputText
+							type="text"
+							id="username"
+							name="username"
+							value={username}
+							onChange={handleChangeUsername}
+							placeholder="Enter the username"
+							className="w-1/2 mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-0 focus:border-blue-300 focus:border-4"
+						/>
+					</div>
+					<div className="mb-2">
+						<label htmlFor="duedate" className="block text-sm font-medium text-gray-600">
+							Due Date
+						</label>
+						<Calendar
+							value={dueDate}
+							onChange={(e) => setDueDate(e.value)}
+							className="w-1/2"
+							placeholder="Enter the Due Date"
+						/>
+					</div>
+					<div className="mb-2">
+						<label htmlFor="fee" className="block text-sm font-medium text-gray-600">
+							Penalty Fee for overdue
+						</label>
+						<InputText
+							type="number"
+							id="fee"
+							name="fee"
+							value={fee}
+							onChange={handleChangeFee}
+							min={1}
+							placeholder="Enter the fee"
+							className="w-1/2 mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-0 focus:border-blue-300 focus:border-4"
+						/>
+						<div className="text-sm">Fees will be increased by 10 everyday</div>
+					</div>
+					<Button
+						color="primary"
+						loading={loading}
+						disabled={loading}
+						onClick={handleSubmit}
+						className="transition-all my-3 py-2 px-4 bg-darkBlue text-white rounded-md hover:bg-white hover:text-darkBlue hover:border-darkBlue hover:border-1 focus:outline-none focus:ring focus:border-blue-300"
+					>
+						ADD
+					</Button>
+				</Fieldset>
 			</div>
 		</>
 	);
