@@ -8,12 +8,12 @@ import { InputText } from 'primereact/inputtext';
 
 function Books() {
 	const role = localStorage.getItem('role').toLowerCase();
-
 	const [loading, setLoading] = useState(true);
 	const [isbn, setIsbn] = useState('');
 	const [modal, setModal] = useState(false);
 	const navigate = useNavigate();
 	const toast = useRef(null);
+
 	const handleChange = (e) => {
 		console.log(e.target.value);
 	};
