@@ -66,7 +66,6 @@ function Dashboard() {
 						iconClass: <MdOutlineMenuBook size={25} />,
 					},
 				],
-				
 			};
 			setCount(data);
 		} else {

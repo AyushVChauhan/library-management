@@ -51,11 +51,15 @@ function Home() {
 					iconClass: <MdOutlineMenuBook />,
 					name: 'Books',
 				},
-
 				{
 					to: '/librarian/bookReturn',
 					iconClass: <FaWpforms />,
 					name: 'Book Return',
+				},
+				{
+					to: '/librarian/history',
+					iconClass: <FaWpforms />,
+					name: 'History',
 				},
 			],
 			'USER': [

@@ -2,17 +2,52 @@ import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import React, { useState } from 'react';
 import { fetchGet, fetchPost } from '../../utils/fetch-utils';
+import Datatable from '../../components/Datatable';
+import { FaCheckCircle } from 'react-icons/fa';
 
 const BookReturn = () => {
 	const role = localStorage.getItem('role');
-	const [username, setUsername] = useState();
-	const [data, setData] = useState([]);
+	const [username, setUsername] = useState([]);
+	const [data, setData] = useState();
 
 	const handlSubmit = async () => {
 		console.log(username);
 		const response = await fetchGet(`${role}/borrows/user/${username}`);
-		console.log(response);
+		if (response.success) {
+			console.log(response);
+			setData(
+				response.data.map((ele, ind) => ({
+					...ele,
+					index: ind + 1,
+					isbn: ele.book.isbn,
+					title: ele.book.title,
+					fullname: ele.user.fullname,
+					borrowDate: new Date(ele.due_date).toLocaleDateString('en-US'),
+					dueDate: new Date(ele.createdAt).toLocaleDateString('en-US'),
+				}))
+			);
+			console.log(data);
+		}
 	};
+	const actionArray = [
+		{
+			icon: <FaCheckCircle className="text-darkBlue" size={20} />,
+			onClick: (e) => {
+				// /return/:borrowId
+				console.log(e);
+			},
+		},
+	];
+
+	const datatableArray = [
+		{ field: 'index', header: 'Sr no.' },
+		{ field: 'fullname', header: 'FulllName' },
+		{ field: 'isbn', header: 'ISBN' },
+		{ field: 'title', header: 'Title' },
+		{ field: 'borrowDate', header: 'Borrow Date' },
+		{ field: 'dueDate', header: 'Due Date' },
+	];
+
 	return (
 		<>
 			<div className="px-10">
@@ -41,6 +76,7 @@ const BookReturn = () => {
 						</div>
 					</div>
 				</div>
+				<Datatable array={datatableArray} action={actionArray} data={data} />
 			</div>
 		</>
 	);
