@@ -9,6 +9,8 @@ import Librarian from './pages/admin/Librarian';
 import Books from './pages/librarian/Books';
 import UserHome from './pages/user/UserHome';
 import Genre from './pages/admin/Genre';
+import BookBorrow from './pages/librarian/BookBorrow';
+import BookBorrowForm from './pages/librarian/BookBorrowForm';
 const routes = createBrowserRouter([
 	{
 		path: '/',
@@ -62,6 +64,14 @@ const routes = createBrowserRouter([
 			{
 				path: 'book',
 				element: <Books />,
+			},
+			{
+				path: 'book/borrow',
+				element: <BookBorrow />,
+			},
+			{
+				path: 'book/borrow/:id',
+				element: <BookBorrowForm />,
 			},
 		],
 	},
