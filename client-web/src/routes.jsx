@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import ErrorElement from './components/ErrorElement';
 import Register from './pages/Register';
 import Librarian from './pages/admin/Librarian';
+import Books from './pages/librarian/Books';
 const routes = createBrowserRouter([
 	{
 		path: '/',
@@ -27,6 +28,19 @@ const routes = createBrowserRouter([
 			{
 				path: 'librarian',
 				element: <Librarian />,
+			},
+		],
+	},
+	{
+		path: '/librarian',
+		element: <Home />,
+		loader: verifyLoader,
+		errorElement: <ErrorElement />,
+		children: [
+			{ path: '', element: <Dashboard /> },
+			{
+				path: 'book',
+				element: <Books />,
 			},
 		],
 	},

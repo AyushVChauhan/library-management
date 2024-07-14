@@ -3,7 +3,7 @@ import { fetchPost } from '../utils/fetch-utils';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'primereact/button';
 
-const roles = ['USER', 'ADMIN'];
+const roles = ['USER', 'LIBRARIAN', 'ADMIN'];
 
 function Login() {
 	const [role, setRole] = useState(roles[0]);

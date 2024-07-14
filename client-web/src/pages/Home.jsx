@@ -36,31 +36,16 @@ function Home() {
 					name: 'Logout',
 				},
 			],
-			'INSTITUTE-HEAD': [
+			'LIBRARIAN': [
 				{
-					to: '/institute-head',
+					to: '/librarian',
 					iconClass: <MdSpaceDashboard />,
 					name: 'Dashboard',
 				},
 				{
-					to: '/institute-head/department',
-					iconClass: <FaSchool />,
-					name: 'Departments',
-				},
-				{
-					to: '/institute-head/teacher',
-					iconClass: <PiChalkboardTeacherFill />,
-					name: 'Teachers',
-				},
-				{
-					to: '/institute-head/student',
-					iconClass: <PiChalkboardTeacherFill />,
-					name: 'Students',
-				},
-				{
-					to: '/institute-head/subject',
+					to: '/librarian/book',
 					iconClass: <MdOutlineMenuBook />,
-					name: 'Subjects',
+					name: 'Books',
 				},
 				{
 					to: '/',
