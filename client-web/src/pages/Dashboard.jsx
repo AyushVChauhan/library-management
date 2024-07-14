@@ -52,12 +52,12 @@ function Dashboard() {
 				'LIBRARIAN': [
 					{
 						label: 'Books',
-						count: 10,
+						count: result.data.bookCount,
 						iconClass: <MdOutlineMenuBook size={25} />,
 					},
 					{
 						label: 'Issued Books',
-						count: 5,
+						count: result.data.issueCount,
 						iconClass: <PiChalkboardTeacherFill size={25}></PiChalkboardTeacherFill>,
 					},
 					{
