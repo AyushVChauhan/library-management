@@ -12,7 +12,6 @@ function UserBookDetail() {
 		setLoading(true);
 		const result = await fetchGet(`user/book/${id}`);
 		if (result.success) {
-			console.log(result.data);
 			setBookData(result.data);
 			setLoading(false);
 		}

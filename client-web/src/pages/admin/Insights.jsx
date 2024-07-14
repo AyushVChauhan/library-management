@@ -147,7 +147,22 @@ const type='horizontal';
                     <div className="text-2xl font-bold">Best Seller</div>
                     <BarChart labels={labels} datasets={datasets} type={type}/>
                         </div>
+                        <div className="rounded-xl shadow-md h-[55vh] p-5 bg-white ">
+                        <div className="text-2xl font-bold">Payment Insights</div>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5  py-5">
+                        <div className="rounded-xl shadow-md h-[25vh] p-5 bg-white ">
+                    <div className="text-2xl font-bold">Payment done</div>
+                
+                            <h1 className='text-2xl font-bold text-center'>144</h1>
+                            </div>
                         
+                        <div className="rounded-xl shadow-md h-[25vh] p-5 bg-white ">
+                    <div className="text-2xl font-bold">Payment remaining</div>
+                            <h1 className='text-2xl font-bold text-center'>154</h1>
+        
+                        </div>
+                        </div>
+                        </div>
                         </div>
 			</div>
 		</>
