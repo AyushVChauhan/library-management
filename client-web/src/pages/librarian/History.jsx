@@ -16,8 +16,9 @@ const History = () => {
 					isbn: ele.book.isbn,
 					title: ele.book.title,
 					fullname: ele.user.fullname,
-					borrowDate: new Date(ele.due_date).toLocaleDateString('en-US'),
-					dueDate: new Date(ele.createdAt).toLocaleDateString('en-US'),
+					borrowDate: new Date(ele.due_date).toLocaleDateString(),
+					dueDate: new Date(ele.createdAt).toLocaleDateString(),
+					is_returned: ele.return_date ? new Date(ele.return_date).toLocaleDateString() : 'Not Returned',
 				}))
 			);
 		}
@@ -25,11 +26,12 @@ const History = () => {
 
 	const datatableArray = [
 		{ field: 'index', header: 'Sr no.' },
-		{ field: 'fullname', header: 'FulllName' },
+		{ field: 'fullname', header: 'Full Name' },
 		{ field: 'isbn', header: 'ISBN' },
 		{ field: 'title', header: 'Title' },
-		{ field: 'borrowDate', header: 'Borrow Date' },
-		{ field: 'dueDate', header: 'Due Date' },
+		{ field: 'borrowDate', header: 'Due Date' },
+		{ field: 'dueDate', header: 'Borrow Date' },
+		{ field: 'is_returned', header: 'Returned on' },
 	];
 
 	useEffect(() => {

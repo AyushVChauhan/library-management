@@ -64,12 +64,14 @@ function Books() {
 	};
 	const handleSubmit = async () => {
 		if (bookData) {
+			const g = genre._id;
 			const result = await fetchPost(
 				localStorage.getItem('role').toLowerCase() + '/book',
-				JSON.stringify({ isbn, quantity, genre })
+				JSON.stringify({ isbn, quantity, genre: g })
 			);
 			if (result.success) {
 				handleReset();
+				getBooks();
 			}
 		} else {
 			const result = await fetchGet(`${role}/book/get/${isbn}`);

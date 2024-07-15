@@ -73,7 +73,7 @@ function BookDashboard() {
 				</div>
 				<button
 					onClick={handleSearch}
-					className="py-2 text-white w-full font-semibold text-xl rounded-md bg-blue-500 mb-5"
+					className="py-2 text-white px-5 font-semibold text-xl rounded-md bg-blue-500 mb-5"
 				>
 					Search
 				</button>

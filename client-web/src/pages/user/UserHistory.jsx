@@ -9,8 +9,8 @@ const UserHistory = () => {
 		{ field: 'index', header: 'Sr no.' },
 		{ field: 'isbn', header: 'ISBN' },
 		{ field: 'title', header: 'Title' },
-		{ field: 'borrowDate', header: 'Borrow Date' },
-		{ field: 'dueDate', header: 'Due Date' },
+		{ field: 'borrowDate', header: 'Due Date' },
+		{ field: 'dueDate', header: 'Borrow Date' },
 	];
 	useEffect(() => {
 		getHistory();
@@ -25,8 +25,8 @@ const UserHistory = () => {
 					index: ind + 1,
 					isbn: ele.book.isbn,
 					title: ele.book.title,
-					borrowDate: new Date(ele.due_date).toLocaleDateString('en-US'),
-					dueDate: new Date(ele.createdAt).toLocaleDateString('en-US'),
+					borrowDate: new Date(ele.due_date).toLocaleDateString(),
+					dueDate: new Date(ele.createdAt).toLocaleDateString(),
 				}))
 			);
 			console.log(data);

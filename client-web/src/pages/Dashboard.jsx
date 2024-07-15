@@ -62,7 +62,7 @@ function Dashboard() {
 					},
 					{
 						label: 'Overdue Books',
-						count: 1,
+						count: 0,
 						iconClass: <MdOutlineMenuBook size={25} />,
 					},
 				],

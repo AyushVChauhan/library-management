@@ -95,7 +95,6 @@ function Datatable({ data, array, action = [], onRowClick = () => {}, extraCompo
 						onChange={(e) => onGlobalFilterChange(e)}
 						placeholder="Search"
 					/>
-					<FaSearch />
 				</span>
 
 				<Button
@@ -157,7 +156,7 @@ function Datatable({ data, array, action = [], onRowClick = () => {}, extraCompo
 							);
 						}
 					})}
-					{action.length>0 && (
+					{action.length > 0 && (
 						<Column
 							headerStyle={headerStyle}
 							bodyStyle={cellStyle}

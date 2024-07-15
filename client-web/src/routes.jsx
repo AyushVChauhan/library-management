@@ -32,7 +32,7 @@ const routes = createBrowserRouter([
 				element: <BookDashboard />,
 			},
 			{
-				path: 'book/:id',
+				path: ':id',
 				element: <UserBookDetail />,
 			},
 		],
@@ -117,7 +117,7 @@ const routes = createBrowserRouter([
 		errorElement: <ErrorElement />,
 		children: [
 			{ path: '', element: <BookDashboard /> },
-			{ path: 'book/:id', element: <UserBookDetail /> },
+			{ path: ':id', element: <UserBookDetail /> },
 			{ path: 'history', element: <UserHistory /> },
 			{ path: 'paymentDue', element: <PaymentDue /> },
 		],
