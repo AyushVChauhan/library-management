@@ -67,13 +67,13 @@ const PaymentDue = () => {
 				visible={modal}
 				modal
 				onHide={() => setModal(false)}
-				header="ADD MODULES"
+				header={`COMPLETE PAYMENT OF ${amount}$`}
 				className="w-2/3 md:w-1/3"
 				blockScroll
 				draggable={false}
 			>
 				<Elements stripe={stripe} options={options}>
-					<PaymentForm amount={amount}></PaymentForm>
+					<PaymentForm></PaymentForm>
 				</Elements>
 			</Dialog>
 		</div>

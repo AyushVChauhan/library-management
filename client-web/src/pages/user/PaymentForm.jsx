@@ -5,7 +5,7 @@ import { Button } from 'primereact/button';
 
 const PAYMENT_SUCESS_URL = import.meta.env.VITE_PAYMENT_SUCCESS_URL;
 
-const PaymentForm = ({ amount }) => {
+const PaymentForm = () => {
 	const stripe = useStripe();
 	const elements = useElements();
 
@@ -35,7 +35,6 @@ const PaymentForm = ({ amount }) => {
 			<form onSubmit={handleSubmit}>
 				<div>
 					<div>
-						<h1 className="text-2xl text-center">Complete payment of {amount}$</h1>
 						<PaymentElement />
 						<div className="text-center mt-2">
 							<Button
